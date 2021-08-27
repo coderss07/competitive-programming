@@ -11,12 +11,12 @@ vb vis;
 vector<int> par;
 
 int32_t main() {
-    int n,m; cin >> n >> m;
+    int n, m; cin >> n >> m;
     adj = vvpi(n + 1);
-    vis = vb(n + 1,false);
+    vis = vb(n + 1, false);
     par = vector<int>(n + 1);
-    rep(i,0,m) {
-        int u,v,w;
+    rep(i, 0, m) {
+        int u, v, w;
         cin >> u >> v >> w;
         adj[u].push_back({v, w});
         adj[v].push_back({u, w});
@@ -33,6 +33,7 @@ int32_t main() {
             par[it.first] = 1;
         }
     }
+    
     int r = 1;    
     while(edge--) {
 

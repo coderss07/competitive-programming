@@ -277,8 +277,8 @@ node* LCA(node* head,int n1,int n2){
 	if(head->data == n1 || head->data == n2){
 		return head;
 	}
-	node* l=LCA(head->lchild,n1,n2);
-	node* r=LCA(head->rchild,n1,n2);
+	node* l=LCA(head->lchild, n1, n2);
+	node* r=LCA(head->rchild, n1, n2);
 	if(l && r){
 		return head;
 	}
@@ -315,7 +315,7 @@ int shortestDistance(node* head, int n1, int n2){
 }
 
 int height(node* head){
-	if(head == NULL){
+	if(head -> lchild == NULL && head -> rchild == NULL){
 		return 0;
 	}
 	return (max(height(head->lchild),height(head->rchild))+1);
@@ -629,6 +629,15 @@ int main() {
 	insert(head, 12);
 	insert(head, 13);
 	insert(head, 11);
+	/*
+	     6
+	   /   \
+	 4      10
+	/ \	   /  \
+   2   5  8    12
+  / \	 / \  /  \
+1	 3	7	9 11  13
+*/
 
 	map<int, vector<int> > mp;
 	verticalOrderprint(head, mp);
@@ -705,7 +714,7 @@ int main() {
 
 	// cout<< sumOfNodes(head) <<endl;
 
-	// cout<< height(head) <<endl;
+	cout<< height(head) <<endl;
 
 	// cout<< diameter(head) <<endl;
 

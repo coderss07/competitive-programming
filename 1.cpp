@@ -12,20 +12,15 @@ int main() {
 	while(t--) {
 		int n;
 		cin >> n;
-		unordered_map<string, pair<int, int> > mp;
+		vi a(n);
 		rep(i, 0, n) {
-			string s;
-			bool sp;
-			cin >> s >> sp;
-			if(!sp) {
-				mp[s].first++;
-			}else {
-				mp[s].second++;
-			}
+			cin >> a[i];
 		}
+
 		int ans = 0;
-		for(auto &it: mp) {
-			ans += max(it.second.first, it.second.second);
+		rep(i, 1, n) {
+			int temp = abs(a[i] - a[i - 1]) - 1;
+			ans += temp;
 		}
 		
 		cout << ans << endl;
