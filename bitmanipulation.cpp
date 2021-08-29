@@ -4,7 +4,7 @@
 using namespace std;
 
 bool get_bit(int n, int pos) {
-	return (n & (1<<pos))!=0;
+	return (n & (1<<pos)) != 0;
 }
 
 int set_bit(int n, int pos) {
@@ -30,7 +30,7 @@ int no_of1s(int n) {
 
 int unique(int *a, int n) {
 	int xorsum = 0;
-	for(int i=0; i<n; i++){
+	for(int i = 0; i < n; i++){
 		xorsum = xorsum ^ a[i];
 	}
 	return xorsum;
@@ -62,8 +62,8 @@ int main() {
 	// int a[3] = {1,2,3};
 	// subset(a, 3);
 
-	int a[6] = {1, 2, 3, 2, 1, 3};
-	cout<< unique(a, 6) << endl;
+	int a[7] = {4, 1, 2, 3, 2, 1, 3};
+	cout<< unique(a, 7) << endl;
 
 	return 0;
 }

@@ -51,7 +51,7 @@ int main() {
 	}
 
     int cost = 0;
-    sort(adj.begin(),adj.end(), [&](vi x,vi y){
+    sort(adj.begin(), adj.end(), [&](vi x,vi y){
         return x[2] < y[2];
     });
 
@@ -60,7 +60,7 @@ int main() {
         int y = find_set(it[1]);
         if(x == y)
             continue;
-        cout<< it[0] << " " << it[1] << endl;
+        cout << it[0] << " " << it[1] << endl;
         cost += it[2];
         union_set(it[0], it[1]);
     }

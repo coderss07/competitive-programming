@@ -22,7 +22,7 @@ int unique(int *a, int n){
 			}
 		}
 		if(cnt%3 != 0){
-			uni=setBit(uni,i);
+			uni = setBit(uni, i);
 		}
 	}
 	return uni;

@@ -22,18 +22,19 @@ int32_t main() {
         adj[v].push_back({u, w});
 
     }
+    int sc; cin >> sc;
 
     int edge = n - 1;
-    vis[1] = true;
+    vis[sc] = true;
     int cost = 0;
     multiset<pii> s;
-    for(auto &it: adj[1]) {
-        if(!vis[it.second]) {
+    for(auto &it: adj[sc]) {
+        if(!vis[it.first]) {
             s.insert({it.second, it.first});
-            par[it.first] = 1;
+            par[it.first] = sc;
         }
     }
-    
+
     int r = 1;    
     while(edge--) {
 
@@ -43,7 +44,7 @@ int32_t main() {
 
         cost += p.first;
             
-        cout << par[p.second] << " " << (p.second) <<endl;
+        cout << par[p.second] << " " << p.second <<endl;
 
         for(auto &it: adj[p.second]) {
             if(!vis[it.first]) {

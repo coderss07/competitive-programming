@@ -29,13 +29,13 @@ bool isCyclic(vvi ad, int node, int par = 1) {
 }
 
 int main() {
-	int n,m;
-	cin>>n>>m;
+	int n, m;
+	cin >> n >> m;
 	n++;
 	vvi adj(n);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y;
-		cin>> x >> y;
+		cin >> x >> y;
 
 		adj[x].push_back(y);
 		adj[y].push_back(x);
@@ -43,7 +43,7 @@ int main() {
 
     bool flag = false;
 
-    rep(i,1,n) {
+    rep(i, 1, n) {
         if(isCyclic(adj, i)) {
             flag = true;
             break;
@@ -51,9 +51,9 @@ int main() {
     }
 
     if(flag) {
-        cout << "Cycle is present" <<endl;
+        cout << "Cycle is present" << endl;
     }else {
-        cout << "Cycle is not present" <<endl;
+        cout << "Cycle is not present" << endl;
     }
 	return 0;
 

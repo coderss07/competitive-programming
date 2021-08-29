@@ -16,6 +16,7 @@ using namespace std;
 0 0 0  4 1 9  0 0 5
 0 0 0  0 8 0  0 7 9
 
+
 0 0 6  0 3 0  0 5 0
 0 9 0  0 8 0  6 0 0
 3 8 0  0 0 0  0 0 2
@@ -29,15 +30,15 @@ using namespace std;
 0 7 0  0 1 0  9 0 0
 */
 
-bool isValid(vv s, int x, int y, int po) {
-	rep(j, 0, 8) {
-		if(s[x][j] == po) {
+bool isValid(vv s, int x, int y, int data) {
+	rep(i, 0, 8) {
+		if(s[x][i] == data) {
 			return false;
 		}
 	}
 
 	rep(i, 0, 8) {
-		if(s[i][y] == po) {
+		if(s[i][y] == data) {
 			return false;
 		}
 	}
@@ -47,7 +48,7 @@ bool isValid(vv s, int x, int y, int po) {
 
 	rep(i, 0, 2) {
 		rep(j, 0, 2) {
-			if(s[mat_i + i][mat_j + j] == po) {
+			if(s[mat_i + i][mat_j + j] == data) {
 				return false;
 			}
 		}
@@ -57,7 +58,7 @@ bool isValid(vv s, int x, int y, int po) {
 }
 
 bool solveSudoku(vv &s, int i = 0, int j = 0) {
-	if(i == 9) {
+	if(i == 9) {  // Base case...
 		return true;
 	}
 
@@ -95,9 +96,8 @@ bool solveSudoku(vv &s, int i = 0, int j = 0) {
 }
 
 int main() {
-	vv sudoku(9);
+	vv sudoku(9, vector<int>(9));
 	rep(i, 0, 8) {
-		sudoku[i] = vector<int>(9);
 		rep(j, 0, 8) {
 			cin >> sudoku[i][j];
 		}
@@ -109,7 +109,7 @@ int main() {
 				cout << sudoku[i][j] << " ";
 			}cout << endl;
 		}
-	}
+	}else cout << "Invalid..." << endl;
 
 	return 0;
 

@@ -13,40 +13,40 @@ int max(int a[], int n) {
 
 int main() {
 	int n;
-	cin>>n;
+	cin >> n;
 	int a[n];
-	for(int i=0;i<n;i++) {
-		cin>>a[i];
+	for(int i = 0; i < n; i++) {
+		cin >> a[i];
 	}
-	int m=max(a,n);
-	int w[m][n]={{0}};
-	for(int i=0;i<n;i++){
-		for(int j=0;j<a[i];j++){
-			w[j][i]=1;
+	int m = max(a, n);
+	int w[m][n] = {{0}};
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < a[i]; j++) {
+			w[j][i] = 1;
 		}
 	}
 
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			if(w[i][j]==0)
-				w[i][j]=2;
+	for(int i = 0; i < m; i++) {
+		for(int j = 0; j < n; j++){
+			if(w[i][j] == 0)
+				w[i][j] = 2;
 			else break;
 		}
-		for(int j=n-1;j>=0;j--){
-			if(w[i][j]==0)
-				w[i][j]=2;
+		for(int j = n - 1; j >= 0; j--) {
+			if(w[i][j] == 0)
+				w[i][j] = 2;
 			else break;
 		}
 	}
-	int cnt=0;
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			if(w[i][j]==0)
+	int cnt = 0;
+	for(int i = 0; i < m; i++) {
+		for(int j = 0; j < n; j++) {
+			if(w[i][j] == 0)
 				cnt++;
 		}
 
 	}
-	cout<<cnt<<"\n";
+	cout << cnt << "\n";
 	
 	
 	

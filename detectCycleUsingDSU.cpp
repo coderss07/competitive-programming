@@ -58,14 +58,14 @@ int main() {
 	vpi adj(m);
 	rep(i,0,m) {
 		int x, y;
-		cin>> x >> y;
+		cin >> x >> y;
         adj[i] = make_pair(x, y);
 	}
 
     if(isCyclic(adj)) {
-        cout << "Cycle is present" <<endl;
+        cout << "Cycle is present" << endl;
     }else {
-        cout << "Cycle is not present" <<endl;
+        cout << "Cycle is not present" << endl;
     }
 	return 0;
 

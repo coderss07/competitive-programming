@@ -18,14 +18,14 @@ using namespace std;
 7 3*/
 
 int main() {
-	int n,m;
-	cin>>n>>m;
+	int n, m;
+	cin >> n >> m;
 	n++;
-	vvi adj_mat(n, vi(n,0));
+	vvi adj_mat(n, vi(n, 0));
 	vvi adj_list(n);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y;
-		cin>> x >> y;
+		cin >> x >> y;
 
 		adj_mat[x][y] = 1;
 		adj_mat[y][x] = 1;

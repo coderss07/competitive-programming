@@ -11,19 +11,19 @@ vi dis;
 vector<int> par;
 
 int32_t main() {
-    int n,m; cin >> n >> m;
+    int n, m; cin >> n >> m;
     adj = vvpi(n + 1);
     dis = vi(n + 1, INT_MAX);
     par = vector<int>(n + 1);
     rep(i,0,m) {
-        int u,v,w;
+        int u, v, w;
         cin >> u >> v >> w;
         adj[u].push_back({v, w});
         adj[v].push_back({u, w});
-
     }
+
     int sc;
-    cin>>sc;
+    cin >> sc;
 
     dis[1] = 0;
     multiset<pii> s;
@@ -45,9 +45,9 @@ int32_t main() {
         }
 
     }
-    rep(i,1,n+1) {
-        cout<< dis[i] << " ";
-    }cout<< endl;
+    rep(i, 1, n+1) {
+        cout << dis[i] << " ";
+    }cout << endl;
 
     return 0;
 }
