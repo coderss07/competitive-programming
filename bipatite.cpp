@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool isBipartite(vvi &ad, int node, vi col, int c) {
+bool isBipartite(vvi &ad, int node, vi col, int c = 0) {
 
     if(col[node] != -1 && col[node] != c) {
         return false;
@@ -27,32 +27,32 @@ bool isBipartite(vvi &ad, int node, vi col, int c) {
 }
 
 int main() {
-	int n,m;
-	cin>>n>>m;
+	int n, m;
+	cin >> n >> m;
 	n++;
 	vvi adj(n);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y;
-		cin>> x >> y;
+		cin >> x >> y;
 
 		adj[x].push_back(y);
 		adj[y].push_back(x);
 	}
 
     bool flag = true;
-    vector<int> col(n,-1);
+    vector<int> col(n, -1);
 
-    rep(i,1,n) {
-        if(!isBipartite(adj, i, col, 0)) {
+    rep(i, 1, n) {
+        if(!isBipartite(adj, i, col)) {
             flag = false;
             break;
         }
     }
 
     if(flag) {
-        cout << "Bipartite" <<endl;
+        cout << "Bipartite" << endl;
     }else {
-        cout << "Not bipartite" <<endl;
+        cout << "Not bipartite" << endl;
     }
 	return 0;
 

@@ -9,17 +9,16 @@
 
 using namespace std;
 
-bool isCyclic(vvi ad, vb vis, vb st, int node = 1) {
+bool isCyclic(vvi ad, vb st, int node = 1) {
 
-    vis[node] = true;
     st[node] = true;
 
     for(auto &it: ad[node]) {
-        if(vis[it] && st[it]) {
+        if(st[it]) {
             return true;
         }
 
-        if(isCyclic(ad, vis, st, it)) {
+        if(isCyclic(ad, st, it)) {
             return true;
         }
 
@@ -40,13 +39,12 @@ int main() {
 		adj[x].push_back(y);
 	}
 
-    vb vis(n, false);
     vb st(n, false);
 
     bool flag = false;
 
     rep(i, 1, n) {
-        if(isCyclic(adj, vis, st, i)) {
+        if(isCyclic(adj, st, i)) {
             flag = true;
             break;
         }

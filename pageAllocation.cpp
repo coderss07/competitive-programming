@@ -10,7 +10,7 @@ bool isSatisfying(int *a, int n, int mid, int m) {
 			return false;
 		}
 		if(a[i] + sum > mid){
-			st ++;
+			st++;
 			sum = a[i];
 			if(st > m) {
 				return false;
@@ -32,7 +32,7 @@ int minimumAllocation(int *a, int n, int m){
 	for (int i = 0; i < n; ++i) r += a[i];
 		int res = INT_MAX;
 	while(l < r) {
-		int mid = (l+r)/2;
+		int mid = (l + r) / 2;
 		if(isSatisfying(a, n, mid, m)) {
 			res = min(res, mid);
 			r = mid - 1;
@@ -47,14 +47,14 @@ int minimumAllocation(int *a, int n, int m){
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
-		int n,m; 
-		cin>>n>>m;
+		int n, m; 
+		cin >> n >> m;
 		int* a = new int[n];
 		for (int i = 0; i < n; ++i)
-			cin>>a[i];
-		cout<< minimumAllocation(a,n,m) <<endl;
+			cin >> a[i];
+		cout << minimumAllocation(a, n, m) << endl;
 	}
 	return 0;
 }

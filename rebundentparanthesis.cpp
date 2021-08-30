@@ -23,14 +23,14 @@ bool rebundent_paranthesis(string s){
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
 		string s;
-		cin>>s;
+		cin >> s;
 		if(rebundent_paranthesis(s))
-			cout<< "Yes\n";
+			cout << "Yes\n";
 		else
-			cout<< "No\n";
+			cout << "No\n";
 	}
 	return 0;
 }

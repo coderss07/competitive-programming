@@ -50,15 +50,15 @@ int main() {
 	// 	}cout<<endl;
 	// }
 
-	map<int, string> lord;
+	// map<int, string> lord;
 	// lord[1] = "Lord_Shiva";
 	// lord[2] = "Vishnu_Dev";
 	// lord.insert({4,"Laxmi_mata"});
 	// lord[3] = "Sai_Baba";
 	
-	for(auto it: lord) {
-		cout<<it.first<<"->"<<it.second<<endl;
-	}
+	// for(auto it: lord) {
+	// 	cout<<it.first<<"->"<<it.second<<endl;
+	// }
 
 	// unordered_map<string, int> m;
 	// for (int i = 0; i < 5; ++i) {
@@ -89,6 +89,20 @@ int main() {
 	// int a[] = {1, 2, 3, 4, 5};
 	// bool is = none_of(a,a+5,[](int x){return x>0;});
 	// cout<<is<<endl;
+
+	multiset<int> s;
+	// s.insert(3);
+	// s.insert(1);
+	// s.insert(1);
+	// s.insert(2);
+	// auto temp = s.begin();
+	// temp++;
+	// temp++;
+	// s.erase(s.begin());
+	cout << s.empty() << endl;
+	for(auto it: s) {
+		cout << it << endl;
+	}cout << endl;
 
 	return 0;
 }

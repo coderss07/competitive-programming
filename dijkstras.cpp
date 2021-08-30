@@ -27,6 +27,7 @@ int32_t main() {
 
     dis[1] = 0;
     multiset<pii> s;
+    // w v in set
     s.insert({0, sc});
 
     while(!s.empty()) {
@@ -35,19 +36,18 @@ int32_t main() {
         s.erase(p);
 
         for(auto &it: adj[p.second]) {
-            if(dis[it.first] > dis[p.second] + it.second) {
+            if(dis[it.first] > dis[p.second] + it.second) { // if u -> v then, dis[v] > dis[u] + wt[u->v]
 
                 s.erase({dis[it.first], it.first});
                 dis[it.first] = dis[p.second] + it.second;
                 s.insert({dis[it.first], it.first});
-
             }
         }
 
     }
-    rep(i, 1, n+1) {
+    rep(i, 1, n + 1) {
         cout << dis[i] << " ";
-    }cout << endl;
+    }cout << endl;y
 
     return 0;
 }

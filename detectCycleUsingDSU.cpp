@@ -49,14 +49,14 @@ bool isCyclic(vpi &ad) {
 }
 
 int main() {
-	int n,m;
-	cin>>n>>m;
+	int n, m;
+	cin >> n >> m;
 	n++;
-    rep(i,1,n) {
+    rep(i, 1, n) {
         make_set(i);
     }
 	vpi adj(m);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y;
 		cin >> x >> y;
         adj[i] = make_pair(x, y);

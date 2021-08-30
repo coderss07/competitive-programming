@@ -6,16 +6,16 @@ using namespace std;
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
-		int n,k;
-		cin>>n>>k;
+		int n, k;
+		cin >> n >> k;
 		vector<int> a(n);
-		rep(i,0,n) {
-			cin>>a[i];
+		rep(i, 0, n) {
+			cin >> a[i];
 		}
 		priority_queue<int, vector<int> > pq;
-		rep(i,0,n) {
+		rep(i, 0, n) {
 			pq.push(a[i]);
 		}
 		int sum = 0;
@@ -26,7 +26,7 @@ int main() {
 			sum += data;
 			cnt++;
 		}
-		cout<< cnt <<endl;
+		cout << cnt << endl;
 	}
 	return 0;
 

@@ -1,7 +1,7 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #define ll long long int
-#define pii pair<int,int>
-#define rep(i,a,b) for (int i = a; i < b; ++i)
+#define pii pair<int, int>
+#define rep(i, a, b) for (int i = a; i < b; ++i)
 
 using namespace std;
 
@@ -15,18 +15,18 @@ cost = sum of computation time
 
 int main() {
 	int t;
-	cin>> t;
-	while(t--) {
+	cin >> t;
+	while (t--) {
 		int n;
-		cin>>n;
+		cin >> n;
 		vector<pii> a(n);
-		rep(i,0,n) {
-			cin>> a[i].first >> a[i].second;
+		rep(i, 0, n) {
+			cin >> a[i].first >> a[i].second;
 		}
-		int l,p;
-		cin>>l>>p;
+		int l, p;
+		cin >> l >> p;
 
-		rep(i,0,n) {
+		rep(i, 0, n) {
 			a[i].first = l - a[i].first;
 		}
 		sort(a.begin(), a.end());
@@ -34,40 +34,39 @@ int main() {
 		int cnt = 0;
 		int curr = p;
 		bool flag = true;
-		priority_queue<int, vector<int> > pq;
+		priority_queue<int, vector<int>> pq;
 
-		rep(i,0,n) {
-			if(curr > l) {
+		rep(i, 0, n) {
+			if (curr > l) {
 				break;
 			}
-			while(curr < a[i].first) {
-				if(pq.empty()){
+			while (curr < a[i].first) {
+				if (pq.empty()) {
 					flag = false;
 					break;
 				}
-				cnt ++;
+				cnt++;
 				curr += pq.top();
 				pq.pop();
 			}
-			if(!flag)
+			if (!flag)
 				break;
 			pq.push(a[i].second);
 		}
-		if(flag) {
-			while(!pq.empty() && curr < l) {
+		if (flag) {
+			while (!pq.empty() && curr < l) {
 				curr += pq.top();
 				pq.pop();
 				cnt++;
 			}
-			if(curr < l){
+			if (curr < l) {
 				flag = false;
 			}
 		}
-		if(flag)
-			cout<< cnt << endl;
+		if (flag)
+			cout << cnt << endl;
 		else
-			cout<< "Not possible" << endl;
+			cout << "Not possible" << endl;
 	}
 	return 0;
-
 }

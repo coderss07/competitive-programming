@@ -7,29 +7,29 @@ const int N = 1e5 + 10;
 vector<int> dp(N, -1);
 
 int fibo(int n) {
+    if(n == 0 || n == 1) return 0;
+    if(n == 2) return 1;
+	
 	if(dp[n] == -1) {
-        dp[n] = fibo(n-1) + fibo(n-2);
+        dp[n] = fibo(n - 1) + fibo(n - 2);
     }
     return dp[n];
 }
 
 // int fibo(int n) {
-//     if(n == 0 || n == 1) return 0;
-//     if(n == 2) return 1;                 // TIME LIMIT EXCEEDED ...
+    // if(n == 0 || n == 1) return 0;
+    // if(n == 2) return 1;                 // TIME LIMIT EXCEEDED ...
 
 //     return fibo(n-1) + fibo(n-2);
 // }
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
 		int n;
-		cin>>n;
-        dp[0] = 0;
-        dp[1] = 0;
-        dp[2] = 1;
-		cout<< fibo(n) <<endl;
+		cin >> n;
+		cout << fibo(n) << endl;
 	}
 	return 0;
 

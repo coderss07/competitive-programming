@@ -4,7 +4,7 @@
 using namespace std;
 
 const int N = 1e3 + 10;
-vector< vector<int>> dp;
+vector< vector<int> > dp;
 
 int coin_change(vector<int> &a, int n, int x) {
 	if (x < 0 || n <= 0) return 0;
@@ -39,7 +39,7 @@ int main() {
 		// cout << dp[x] << endl;
 
 		dp = vector<vector<int>>(n + 1, vector<int>(x + 1, -1));
-		cout<< coin_change(a, n, x) <<endl;
+		cout << coin_change(a, n, x) << endl;
 		// cout<< dp[x] <<endl;
 	}
 	return 0;

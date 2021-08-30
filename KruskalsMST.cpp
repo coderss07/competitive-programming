@@ -30,28 +30,28 @@ void union_set(int a, int b) {
         return;
     }
     if(sz[a] < sz[b]) {
-        swap(a,b);
+        swap(a, b);
     }
     parent[b] = a;
     sz[a] += sz[b];
 }
 
 int main() {
-	int n,m;
+	int n, m;
 	cin >> n >> m;
 	n++;
-    rep(i,1,n) {
+    rep(i, 1, n) {
         make_set(i);
 	}
 	vvi adj(m);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y, w;
 		cin >> x >> y >> w;
         adj[i] = {x, y, w};
 	}
 
     int cost = 0;
-    sort(adj.begin(), adj.end(), [&](vi x,vi y){
+    sort(adj.begin(), adj.end(), [&](vi x, vi y){
         return x[2] < y[2];
     });
 
@@ -64,7 +64,7 @@ int main() {
         cost += it[2];
         union_set(it[0], it[1]);
     }
-    cout<< cost << endl;
+    cout << cost << endl;
     
 	return 0;
 

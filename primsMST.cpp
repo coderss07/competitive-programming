@@ -35,7 +35,7 @@ int32_t main() {
         }
     }
 
-    int r = 1;    
+    int r = 1;
     while(edge--) {
 
         auto p = *(s.begin());
