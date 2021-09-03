@@ -10,7 +10,7 @@ bool vis[N];
 
 void DFS(vvi ad, int node) {
 	vis[node] = true;
-	cout<< node << " ";
+	cout << node << " ";
 
 	for(auto &it: ad[node]) {
 		if(!vis[it]) {
@@ -56,7 +56,7 @@ int main() {
 	// 			vis[it] = true;
 	// 		}
 	// 	}
-	// }cout<<endl;
+	// }cout << endl;
 
 	return 0;
 

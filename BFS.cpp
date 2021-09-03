@@ -9,13 +9,13 @@ const int N = 1e5 + 1;
 bool vis[N];
 
 int main() {
-	int n,m;
-	cin>>n>>m;
+	int n, m;
+	cin >> n >> m;
 	n++;
 	vvi adj(n);
-	rep(i,0,m) {
+	rep(i, 0, m) {
 		int x, y;
-		cin>> x >> y;
+		cin >> x >> y;
 
 		adj[x].push_back(y);
 		adj[y].push_back(x);
@@ -28,7 +28,7 @@ int main() {
 	while(!q.empty()) {
 		int i = q.front();
 		q.pop();
-		cout<< i << " ";
+		cout << i << " ";
 
 		for(auto &it: adj[i]) {
 			if(!vis[it]) {
@@ -36,15 +36,15 @@ int main() {
 				q.push(it);
 			}
 		}
-	}cout<<endl;
+	}cout << endl;
 
-	cout<< "\nAdjacent List for the undirected graph is : " <<endl;
-	rep(i,1,n) {
-		cout<< "list " << i << "-> ";
-		for(auto it: adj[i]) {
-			cout<< it <<" ";
-		}cout<<endl;
-	}
+	// cout<< "\nAdjacent List for the undirected graph is : " <<endl;
+	// rep(i,1,n) {
+	// 	cout<< "list " << i << "-> ";
+	// 	for(auto it: adj[i]) {
+	// 		cout<< it <<" ";
+	// 	}cout<<endl;
+	// }
 
 
 	return 0;

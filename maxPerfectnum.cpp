@@ -6,14 +6,14 @@ using namespace std;
 bool is_perfect(int n) {
 	int sum = 1;
 	for(int i = 2; i * i <= n; i++) {
-		if(n%i == 0) {
-			if(i == n/i)
+		if(n % i == 0) {
+			if(i == n / i)
 				sum += i;
 			else
 				sum += i + n/i;
 		}
 	}
-	if(sum == n && n!=1)
+	if(sum == n && n != 1)
 		return true;
 	return false;
 }
@@ -34,7 +34,7 @@ int max_PerfectNum(vector<int> a, int k) {
 	}
 	int m = sum;
 	for (int i = k; i < a.size(); ++i){
-		sum -= a[i-k];
+		sum -= a[i - k];
 		sum += a[i];
 		m = max(m, sum);
 	}

@@ -16,22 +16,23 @@ using namespace std;
 
 int main() {
 	int k;
-	cin>>k;
+	cin >> k;
 	vector<vector<int>> a(k);
-	rep(i,0,k) {     //i = 0 to i<n & i++
+	rep(i, 0, k) {     //i = 0 to i<n & i++
 		int n;
-		cin>>n;
+		cin >> n;
 		a[i] = vector<int>(n);
-		rep(j,0,n) {
-			cin>>a[i][j];
+		rep(j, 0, n) {
+			cin >> a[i][j];
 		}
 	}
-	vector<int> idx(k,0);
+	vector<int> idx(k, 0);
 
 	priority_queue<pii, vector<pii>, greater<pii> > pq;
-	rep(i,0,k) {
+	rep(i, 0, k) {
 		pq.push({a[i][0], i});
 	}
+	
 	vector<int> ans;
 	while(!pq.empty()) {
 		pii p = pq.top();
@@ -40,13 +41,13 @@ int main() {
 		ans.push_back(p.first);
 
 		if(idx[p.second] + 1 < a[p.second].size()) {
-			pq.push({a[p.second][idx[p.second]+1],p.second});
+			pq.push({a[p.second][idx[p.second] + 1], p.second});
 		}
 		idx[p.second]++;
 	}
 	for(auto &it: ans) {
-		cout<< it << " ";
-	}cout<<endl;
+		cout << it << " ";
+	} cout << endl;
 	return 0;
 
 }

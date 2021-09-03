@@ -9,7 +9,7 @@ pii merge(int a[], int l, int m, int h) {
 	int k = 0;
 	int com = 0;
 	int inv = 0;
-	int b[h - l + 1];
+	int* b = new int[h - l + 1];
 	while (i <= m && j <= h) {
 		if (a[i] < a[j]) {
 			if(i != k) inv++;
@@ -40,6 +40,8 @@ pii merge(int a[], int l, int m, int h) {
 	
 	for (i = l; i <= h; i++)
 		a[i] = b[i - l];
+	
+	delete b;
 
 	return {com, inv};
 }

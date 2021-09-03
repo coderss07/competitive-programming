@@ -27,7 +27,7 @@ int main() {
     vi a(n);
 
     dp = vvi(N, vi(N, -1));
-iii
+    
     rep(i, 0, n) {
         cin >> a[i];
     }

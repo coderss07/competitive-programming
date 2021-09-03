@@ -91,15 +91,16 @@ int main() {
 	// cout<<is<<endl;
 
 	multiset<int> s;
-	// s.insert(3);
-	// s.insert(1);
-	// s.insert(1);
-	// s.insert(2);
-	// auto temp = s.begin();
+	s.insert(3);
+	s.insert(1);
+	s.insert(1);
+	s.insert(2);
+	auto temp = s.begin();
+	temp += 2;
 	// temp++;
 	// temp++;
-	// s.erase(s.begin());
-	cout << s.empty() << endl;
+	// s.erase(temp);
+	cout << *temp << endl;
 	for(auto it: s) {
 		cout << it << endl;
 	}cout << endl;

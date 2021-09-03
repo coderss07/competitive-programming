@@ -12,7 +12,7 @@ using namespace std;
 */
 
 int maxConsecutiveones(vector<int> a, int n, int k){
-	int j=0,cnt_zeros=0,ans=0;
+	int j = 0, cnt_zeros = 0, ans = 0;
 	for (int i = 0; i < n; ++i){
 		if(a[i] == 0)
 			cnt_zeros++;
@@ -22,7 +22,7 @@ int maxConsecutiveones(vector<int> a, int n, int k){
 			}
 			j++;
 		}
-		ans = max( ans, i-j+1);
+		ans = max(ans, i - j + 1);
 	}
 	return ans;
 
@@ -30,17 +30,17 @@ int maxConsecutiveones(vector<int> a, int n, int k){
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
-		int n,k;
-		cin>>n>>k;
+		int n, k;
+		cin >> n >> k;
 		vector<int> a(n);
 		for (auto &i: a){
-			cin>>i;
+			cin >> i;
 		}
 		
-		int ans=maxConsecutiveones(a,n,k);
-		cout<< ans <<endl;
+		int ans = maxConsecutiveones(a, n, k);
+		cout << ans << endl;
 	}
 	return 0;
 }

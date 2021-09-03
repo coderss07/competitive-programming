@@ -40,7 +40,7 @@ void Insert(int x) {
 
 float median() {
 	if(maxheap.size() == minheap.size()) {
-		return (maxheap.top() + minheap.top()) / 2;
+		return (maxheap.top() + minheap.top()) / 2.0;
 	}else if(maxheap.size() > minheap.size()) {
 		return maxheap.top();
 	}else {
@@ -50,17 +50,16 @@ float median() {
 
 int main() {
 	int n;
-	cin>>n;
-	int a[n];
-	for(int i=0; i<n; i++) {
-		cin>>a[i];
+	cin >> n;
+	vector<int> a(n);
+	for(int i = 0; i < n; i++) {
+		cin >> a[i];
 	}
-	int marks = 0;
 	int i;
 	for (i = 0; i < n; ++i) {
 		Insert(a[i]);
-		cout<< median() <<" ";
-	}cout<<endl;
+		cout << fixed << setprecision(1) << median() << " ";
+	}cout << endl;
 	return 0;
 
 }

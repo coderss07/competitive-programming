@@ -5,14 +5,14 @@ using namespace std;
 
 int main() {
 	int t;
-	cin>>t;
+	cin >> t;
 	while(t--) {
-		ll n,k,x; 
-		cin>>n>>k>>x;
+		ll n, k, x; 
+		cin >> n >> k >> x;
 		vector<ll> a;
 		for (int i = 0; i < n; ++i){
 			ll item;
-			cin>>item;
+			cin >> item;
 			a.push_back(item);
 		}
 		ll sum = 0;
@@ -22,13 +22,13 @@ int main() {
 		ll ans = 0;
 		if(sum < x)
 			ans = sum;
-		for(int i=k; i<n; i++){
+		for(int i = k; i < n; i++){
 			sum -= a[i - k];
 			sum += a[i];
 			if(sum < x)
-				ans = max(ans,sum);
+				ans = max(ans, sum);
 		}
-		cout<<ans<< "\n";
+		cout << ans << "\n";
 	}
 	
 	return 0;
