@@ -8,21 +8,19 @@ int RainwaterTraping(vector<int> a, int n) {
 	int m = 0;
 	for(int i = 0; i < n; i++) {
 		if(a[i] >= m) {
-			left_max[i] = a[i];
-		}else {
-			left_max[i] = m;
+			m = a[i];
 		}
-		m = max(m, a[i]);
+		left_max[i] = m;
+		// m = max(m, a[i]);
 	}
 	
 	m = 0;
 	for(int i = n - 1; i >= 0; i--) {
 		if(a[i] >= m){
-			right_max[i] = a[i];
-		}else{
-			right_max[i] = m;
+			m = a[i];
 		}
-		m = max(m, a[i]);
+		right_max[i] = m;
+		// m = max(m, a[i]);
 	}
 	
 	int total=0;

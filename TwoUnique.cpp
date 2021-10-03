@@ -6,8 +6,8 @@ using namespace std;
 /*10
 1 2 3 1 4 3 7 2 7 8*/
 
-int getBit(int n,int pos){
-	return (n & (1<<pos)) != 0;
+int getBit(int n, int pos){
+	return (n & (1 << pos)) != 0;
 }
 
 void unique(int *a, int n){
@@ -17,31 +17,30 @@ void unique(int *a, int n){
 		Xorsum = Xorsum ^ a[i];
 	}
 	int pos = -1;
-	bool set = false;
+	bool set = 0;
 	while(!set){
 		pos++;
 		set = getBit(Xorsum, pos);
 	}
-	cout<<pos<<endl;
 	int Xor=0;
 	for (int i = 0; i < n; ++i) {
-		if(getBit(a[i],pos)){
-			Xor = Xor^a[i];
+		if(getBit(a[i], pos)) {
+			Xor = Xor ^ a[i];
 		}
 	}
-	cout<<Xor<<" "<<(Xorsum^Xor)<<endl;
+	cout << Xor << " " << (Xorsum ^ Xor) << endl;
 
 }
 
 int main() {
 	int n;
-	cin>>n;
+	cin >> n;
 	int a[n];
 	for (int i = 0; i < n; ++i)
 	{
 		cin>>a[i];
 	}
-	unique(a,n);
+	unique(a, n);
 	return 0;
 
 }

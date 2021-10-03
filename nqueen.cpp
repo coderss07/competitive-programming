@@ -19,7 +19,7 @@ bool valid(int** a, int x, int y, int n) {
 	}
 	row = x;
 	col = y;
-	while(row >= 0 && col >= 0) {
+	while(row >= 0 && col < 0) {
 		if(a[row][col] == 1){
 			return false;
 		}

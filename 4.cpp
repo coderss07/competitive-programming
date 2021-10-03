@@ -8,26 +8,36 @@ vector<int> mp(N, 0);
 
 int main()
 {
-	ll m, n;
-	cin >> m >> n;
-	// memset(mp, sizeof(mp), 0);
-	
-	for(ll i = 0; i < m; i++)
-	{
-		ll k, x;
-		cin >> k >> x;
-		mp[x]++;
+	string a, b;
+	cin >> a >> b;
+
+	bool flag = true;
+	int i = 0, j = 0;
+	while(i < a.size() && j < b.size()) {
+		if(a[i] == b[j] || a[i] - 32 == b[j]) {gh
+			i++; j++;
+		}else {
+			if(a[i] < 'Z') {
+				flag = false;
+				break;
+			}
+			i++;
+		}
 	}
-	ll cnt = 0;
-	for(ll i = 0; i < n; i++)
-	{
-		ll l;
-		cin >> l;
-		
-		if(mp[l]) cnt++;
+	if(j < b.size()) {
+		flag = false;
+	}
+	if(flag) {
+		while(i < a.size()) {
+			if(a[i] < 'Z') {
+				flag = false;
+				break;
+			}
+			i++;
+		}
 	}
 	
-	if(cnt == n)
+	if(flag)
 		cout<<"YES\n";
 	else
 		cout<<"NO\n";

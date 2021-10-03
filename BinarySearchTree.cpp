@@ -46,7 +46,7 @@ void findfunc(node* head, node* &par, node* &loc,int val){
 
 	}
 	par = parptr;
-	loc =NULL;
+	loc = NULL;
 
 }
 
@@ -621,6 +621,24 @@ void verticalOrderprint(node* head, map<int, vector<int>> &m, int h = 0) {
 	verticalOrderprint(head->rchild, m, h + 1);
 }
 
+void top(node* root, map<int, int> &m, int h = 0) {
+    if(root) {
+        if(m[h] == 0) {
+            m[h] = root->data;
+        }
+        top(root->lchild, m, h - 1);
+        top(root->rchild, m, h + 1);
+    }
+}
+
+void topView(node * root) {
+    map<int, int> m;
+    top(root, m);
+    for(auto &it: m) {
+        cout << it.second << " ";
+    }      
+}
+
 int main() {
 	node* head = NULL;
 	insert(head, 6);
@@ -646,13 +664,15 @@ int main() {
 1	 3	7	9 11  13
 */
 
-	map<int, vector<int> > mp;
-	verticalOrderprint(head, mp);
-	for(auto &it : mp) {
-		for(int i = 0; i < (it.second).size(); i++) {
-			cout << (it.second)[i] << " ";
-		}cout << endl;
-	}cout << endl;
+	topView(head);
+
+	// map<int, vector<int> > mp;
+	// verticalOrderprint(head, mp);
+	// for(auto &it : mp) {
+	// 	for(int i = 0; i < (it.second).size(); i++) {
+	// 		cout << (it.second)[i] << " ";
+	// 	}cout << endl;
+	// }cout << endl;
 
 	// node* head1 = NULL;
 	// insert(head1, 6);

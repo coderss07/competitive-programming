@@ -36,7 +36,7 @@ int minimumAllocation(int *a, int n, int m){
 		if(isSatisfying(a, n, mid, m)) {
 			res = min(res, mid);
 			r = mid - 1;
-		}else{
+		}else {
 			l = mid + 1;
 		}
 	}

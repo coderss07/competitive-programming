@@ -25,18 +25,18 @@ int32_t main() {
     rep(i, 0, n) {
         cin >> a[i];
     }
-    // dp = vi(n, -1);
-    // cout << largestIncSubseq(a, n - 1) << endl;
+    dp = vi(n, -1);
+    cout << largestIncSubseq(a, n - 1) << endl;
 
-    dp = vi(n, 1);
-    rep(i, 1, n) {
-        rep(j, 0, i) {
-            if(a[i] > a[j]) {
-                dp[i] = max(dp[i], 1 + dp[j]);
-            }
-        }
-    }
-    cout << dp[n -1] << endl;
+    // dp = vi(n, 1);
+    // rep(i, 1, n) {
+    //     rep(j, 0, i) {
+    //         if(a[i] > a[j]) {
+    //             dp[i] = max(dp[i], 1 + dp[j]);
+    //         }
+    //     }
+    // }
+    // cout << dp[n -1] << endl;
 
     return 0;
 }

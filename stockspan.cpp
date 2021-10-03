@@ -17,7 +17,6 @@ vector<int> stockSpan(vector<int> &a, int n){
 		st.push({a[i], cnt});
 	}
 	return ans;
-
 }
 
 int main() {

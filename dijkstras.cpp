@@ -47,7 +47,7 @@ int32_t main() {
     }
     rep(i, 1, n + 1) {
         cout << dis[i] << " ";
-    }cout << endl;y
+    }cout << endl;
 
     return 0;
 }

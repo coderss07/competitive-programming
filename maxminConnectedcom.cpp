@@ -40,18 +40,18 @@ void union_set(int a, int b) {
     sz[b] = sz[a];
 }
 
-vector<int> componentsInGraph(vector<vector<int>> gb) {
+vector<int> componentsInGraph(vector<vector<int>> &gb) {
     int n = 1;
     for(auto &it: gb) {
         n = max(n, max(it[0], it[1]));
     }
-    for(int i = 0; i < n; i++) {
+    for(int i = 1; i <= n; i++) {
         make_set(i);
     }
     for(auto &it: gb) {
         union_set(it[0], it[1]);
     }
-    int a = find_set(1);
+    int a;
     int b;
     int sm = n, lar = 1;
     for(auto &it: gb) {
@@ -94,8 +94,6 @@ int main()
     }
 
     cout << "\n";
-
-    // fout.close();
 
     return 0;
 }

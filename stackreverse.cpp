@@ -21,19 +21,19 @@ void reverse(stack<int> &s){
 		return;
 	}
 
-	int data=s.top();
+	int data = s.top();
 	s.pop();
 	reverse(s);
-	insert(s,data);
+	insert(s, data);
 
 }
 
 void display(stack<int> s){
 	while(!s.empty()){
-		int e=s.top();
-		cout<<e<<" ";
+		int e = s.top();
+		cout << e << " ";
 		s.pop();
-	}cout<<endl;
+	}cout << endl;
 
 }
 

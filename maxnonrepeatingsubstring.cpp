@@ -10,10 +10,11 @@ int maxNonrepeating(string s){
 		ind[i] = -1;
 	}
 	for (int i = 0; i < s.size(); ++i){
-		if(ind[s[i] - 'a'] != -1){
+		if(ind[s[i] - 'a'] != -1 && ind[s[i] - 'a'] > j){
 			j = ind[s[i] - 'a'];
 		}
-		ind[s[i] - 'a'] = i;		
+		ind[s[i] - 'a'] = i;
+		// cout << i << " " << j << " " << endl;	
 		ans = max(ans, i - j);
 	}
 	return ans;

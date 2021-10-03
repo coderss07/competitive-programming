@@ -17,13 +17,13 @@ int Matrix_chainMul(vi &a, int i, int j) {
     dp[i][j] = INT_MAX;
 
     rep(k, i, j) {
-        dp[i][j] = min(dp[i][j], Matrix_chainMul(a, i, k) + Matrix_chainMul(a, k + 1, j) + ( a[i-1] * a[k] * a[j]));
+        dp[i][j] = min(dp[i][j], Matrix_chainMul(a, i, k) + Matrix_chainMul(a, k + 1, j) + (a[i - 1] * a[k] * a[j]));
     }
     return dp[i][j];
 }
 
 int main() {
-	int n; cin >> n;o
+	int n; cin >> n;
     vi a(n);
 
     dp = vvi(N, vi(N, -1));
