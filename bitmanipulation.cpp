@@ -61,7 +61,7 @@ void subset(int  *a, int n) {
 				cout<< a[j] <<" ";
 			else
 				cout<< "- ";
-		}cout<<" }"<<endl;
+		}cout<<"}"<<endl;
 	}
 }
 
@@ -75,12 +75,12 @@ int main() {
 	// cout<< (power_Of2(n) ? "Yes" : "No") << endl;
 	// cout<< (power_Of4(8) ? "Yes" : "No") << endl;
 	// cout<< (power_Of3(27) ? "Yes" : "No") << endl;
-	cout << reverseBits(1) << endl;
+	// cout << reverseBits(1) << endl;
 
 	// cout<< no_of1s(60) << endl;
 
-	// int a[3] = {1,2,3};
-	// subset(a, 3);
+	int a[3] = {1,2,3};
+	subset(a, 3);
 
 	// int a[7] = {4, 1, 2, 3, 2, 1, 3};
 	// cout<< unique(a, 7) << endl;
@@ -100,7 +100,8 @@ int main() {
     // if(s.empty()) {
     // 	s += "0";
     // }
-    // cout << s << endl;
+    // cout << bitset<20>(21) << endl;
+    // cout << 0b1110001;
 
 	return 0;
 }

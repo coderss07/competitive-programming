@@ -578,6 +578,20 @@ info largestBST(node* head){
 	return par;
 }
 
+bool isValidBST(node* head, node* min, node* max) {
+	if(!head) {
+		return true;
+	}
+
+	if((min && head->data <= min->data) or (max && head->data >= max->data)) {
+		return false;
+	}
+	if(isValidBST(head->lchild, min, head) and isValidBST(head->rchild, head, max)) {
+		return true;
+	}
+	return false;
+}
+
 void calc(node* head, node* &f, node* &m, node* &l, node* &p) {
 	if(!head) {
 		return;
