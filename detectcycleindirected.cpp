@@ -14,11 +14,7 @@ bool isCyclic(vvi ad, vb st, int node = 1) {
     st[node] = true;
 
     for(auto &it: ad[node]) {
-        if(st[it]) {
-            return true;
-        }
-
-        if(isCyclic(ad, st, it)) {
+        if(st[it] or isCyclic(ad, st, it)) {
             return true;
         }
 

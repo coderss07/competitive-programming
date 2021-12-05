@@ -4,7 +4,7 @@ using namespace std;
 
 string keys[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
 
-void substrings(string s,string ans){
+void substrings(string s,string ans = ""){
 	if(s.size()==0){
 		cout<<"{ " << ans << " }" <<endl;
 		return;
@@ -16,6 +16,6 @@ void substrings(string s,string ans){
 }
 
 int main() {
-	substrings("792","");
+	substrings("792");
 	return 0;
 }

@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #define vi vector<int>
+#define vii vector<pair<int, int>>
 #define vvi vector<vector<int>>
 #define rep(i,a,b) for(int i = a; i < b; ++i)
 
@@ -8,17 +9,17 @@ using namespace std;
 const int N = 1e5 + 1;
 bool vis[N];
 
-void DFS(vvi &ad, int node, vi &st, vi &ed, int &t) {
+void DFS(vvi &ad, int node, vii &time, int &t) {
 	vis[node] = true;
 	cout << node << " ";
-	st[node] = t++;
+	time[node].first = t++;
 
 	for(auto &it: ad[node]) {
 		if(!vis[it]) {
 			DFS(ad, it, st, ed, t);
 		}
 	}
-	ed[node] = t++;
+	time[node].second = t++;
 }
 
 int main() {
@@ -41,15 +42,14 @@ int main() {
 	// 		cout<< it <<" ";
 	// 	}cout<<endl;
 	// }
-	vi starting(n);
-	vi ending(n);
+	vii time(n);
 	int t = 1;
 
-	DFS(adj, 1, starting, ending, t);
+	DFS(adj, 1, time, t);
 	cout << endl;
 
 	for(int i = 1; i < n; i++)
-		cout << starting[i] << " " << ending[i] << endl;
+		cout << time[i].first << " " << time[i].second << endl;
 
 	return 0;
 

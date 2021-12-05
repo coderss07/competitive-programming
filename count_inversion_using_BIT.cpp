@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
+// Date: 2021-10-23 18:53
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,18 +12,17 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
 #define ss second
 #define pb push_back
 #define mp make_pair
+#define lb lower_bound
+#define up upper_bound
 #define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define endl "\n"
 #define tab1 " "
-#define lb lower_bound
-#define up upper_bound
 #define vvi vector<vector<int>>
 #define rep(i, a, b) for(int i = a; i < b; i++)
 #define rrep(i, b, a) for(int i = b - 1; i >= a; i--)
@@ -44,33 +43,49 @@ template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << 
 
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e6;
+const int N = 1e5 + 10;
 const int mod = 1e9;
 
-void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+int n;
+vi bit;
+
+void update(int idx, int val) {
+	while(idx <= n) {
+		bit[idx] += val;
+		idx += idx & (-idx); // 2's comp & 
+	}
+}
+
+int query(int idx) {
+	int ans = 0;
+	while(idx > 0) {
+		ans += bit[idx];
+		idx -= idx & (-idx);
+	}
+	return ans;
 }
 
 int main() {
     clock_t begin_69 = clock();
     fast_io;
+    cin >> n;
+    vi a(n);
+    bit = vi(n + 1);
+    rep(i, 0, n) {
+    	cin >> a[i];
+    }
+    vi tmp = a;
+    sort(all(tmp));
+    rep(i, 0, n) {
+        a[i] = lb(all(tmp), a[i]) - tmp.begin() + 1;
+    }
 
-    int t; cin >> t;
-    while(t--) solve();
-    
+    int ans = 0;
+    rrep(i, n, 0) {
+        ans += query(a[i] - 1);
+        update(a[i], 1);
+    }
+    cout << ans << endl;
     
     #ifndef ONLINE_JUDGE
           clock_t terminator_69 = clock();
@@ -78,5 +93,3 @@ int main() {
     #endif 
     return 0;
 }
-
-

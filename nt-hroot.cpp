@@ -15,7 +15,7 @@ int main() {
     double l = 1, h = n;
     while(h - l > eps) {
         double m = (h + l) / 2;
-        if(m * m * m < n) {
+        if(m * m < n) {
             l = m;
         }else {
             h = m;

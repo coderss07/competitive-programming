@@ -36,6 +36,19 @@ uint32_t reverseBits(uint32_t n) {
 	return ans;
 }
 
+uint32_t duplicate(int *a, int n) {
+	int ans = 0;
+	for(int k = 0; k < 32; k++) {
+		int x = 0, y = 0;
+		for(int i = 0; i < n; i++) {
+			if(get_bit(i, k)) x++;
+			if(get_bit(a[i], k)) y++;
+		}
+		if(x < y) ans = (ans << k);
+	}
+	return ans;
+}
+
 int no_of1s(int n) {
 	int cnt=0;
 	while(n) {

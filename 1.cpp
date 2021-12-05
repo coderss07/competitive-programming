@@ -1,82 +1,52 @@
-// Author : Sarthak Sharma
-// date: 2021-10-09 21:10:14
 #include<bits/stdc++.h>
-// <------------------------------------- Directives ------------------------------------->
+
 #define ll long long int
 #define vi vector<int>
 #define vl vector<ll>
 #define vll vector<vector<ll>>
+#define vc vector<char>
+#define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
-#define mod 1000000007
 #define ss second
 #define pb push_back
+#define mp make_pair
 #define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define endl "\n"
 #define tab1 " "
+#define lb lower_bound
+#define up upper_bound
 #define vvi vector<vector<int>>
 #define rep(i, a, b) for(int i = a; i < b; i++)
 #define rrep(i, b, a) for(int i = b - 1; i >= a; i--)
+#define all(a) a.begin(), a.end()
 
 using namespace std;
 
-// <------------------------------------- Code ------------------------------------->
+const int N = 1e6 + 1;
+const int mod = 1e9 + 7;
 
 
-void solve() {
-    int n, k;
-    cin >> n >> k;
-    vl a(n);
-    rep(i, 0, n) {
-        cin >> a[i];
-    }
-    vvi cnt(n + 1, vi(1, 0));
-    rep(i, 0, n) {
-        cnt[a[i]][0]++;
-        cnt[a[i]].pb(i);
-    }
-    for(auto ae: cnt) {
-        for(auto it: ae) {
-            cout << it << tab1;
-        }cout << endl;
-    }
-    vi b;
-    int last = n + 1;
-    rep(it, 0, cnt.size()) {
-        if(cnt[it][0] == 0) {
-            last = it;
-            b.pb((n * (n + 1)) / 2);
-            break;
-        }
-        int ans = 0;
-        int tmp = -1;
-        rep(i, 1, cnt[it][0] + 1) {
-            int j = (cnt[it][i] - tmp - 1);
-            ans += ((j * (j + 1)) / 2);
-            tmp = cnt[it][i];
-        }
-        int j = n - tmp - 1;
-        ans += ((j * (j + 1)) / 2);
-        b.pb(ans);
-    }
-    rep(i, 1, last + 1) {
-        rep(j, 0, )
-        cnt[a[i]][0]++;
-        cnt[a[i]].pb(i);
-    }
+// void solve() {
+//     cin >> s;
+//     int q; cin >> q;
+//     calc();
+//     while(q--) {
+//         int l, r;
+//         cin >> l >> r;
 
-    for(auto &it: b) {
-        cerr << it << tab1;
-    }cerr << endl;
-    // cout << ans[k - 1] << endl;
-}
-
+//     }cout << endl;
+// }
 
 int main() {
-	clock_t begin_69 = clock();
+    clock_t begin_69 = clock();
     fast_io;
-    int t; cin >> t;
-    while(t--) {
-        solve();
-    }
+    int t;
+    cin >> t;
+    while(t--) solve(t);
+    #ifndef ONLINE_JUDGE
+          clock_t terminator_69 = clock();
+          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+    #endif
+    return 0;
 }

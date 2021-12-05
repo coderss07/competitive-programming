@@ -5,8 +5,8 @@ using namespace std;
 void heapify(int a[], int i, int n) {
 
 	int lar = i;
-	int lc = (2*i) + 1;
-	int rc = (2*i) + 2;
+	int lc = (2 * i) + 1;
+	int rc = (2 * i) + 2;
 	
 	if(lc < n && a[lc] > a[lar])
 		lar = lc;
@@ -26,7 +26,7 @@ void heapify(int a[], int i, int n) {
 void heapSort(int a[], int n) {
 	//for creating max heap
 
-	for(int i = ( n/2 ) - 1; i >= 0; i--) {
+	for(int i = (n / 2) - 1; i >= 0; i--) {
 		heapify(a, i, n);
 	}
 

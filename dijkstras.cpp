@@ -14,7 +14,7 @@ int32_t main() {
     int n, m; cin >> n >> m;
     adj = vvpi(n + 1);
     dis = vi(n + 1, INT_MAX);
-    par = vector<int>(n + 1);
+    par = vi(n + 1);
     rep(i,0,m) {
         int u, v, w;
         cin >> u >> v >> w;

@@ -17,10 +17,7 @@ bool isCyclic(vvi ad, int node, int par = 1) {
 
     for(auto &it: ad[node]) {
         if(it != par) {
-            if(vis[it]) {
-                return true;
-            }
-            if(isCyclic(ad, it, node)) {
+            if(vis[it] or isCyclic(ad, it, node)) {
                 return true;
             }
         }

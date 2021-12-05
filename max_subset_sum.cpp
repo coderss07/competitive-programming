@@ -35,7 +35,7 @@ int main() {
         rep(i, 0, n) {
             cin >> a[i];
         }
-         cout << maxSumSubset(a, n) << endl;
+        cout << maxSumSubset(a, n) << endl;
     }
     return 0;
 }

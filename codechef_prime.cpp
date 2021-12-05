@@ -1,5 +1,4 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,7 +11,6 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
@@ -22,14 +20,11 @@
 #define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define endl "\n"
 #define tab1 " "
-#define lb lower_bound
-#define up upper_bound
 #define vvi vector<vector<int>>
 #define rep(i, a, b) for(int i = a; i < b; i++)
 #define rrep(i, b, a) for(int i = b - 1; i >= a; i--)
 #define fbo find_by_order
 #define oof order_of_key
-#define all(a) a.begin(), a.end()
 
 using namespace std;
 using namespace __gnu_pbds;
@@ -38,45 +33,56 @@ using namespace __gnu_pbds;
 template <class T> using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 template <class K, class V> using omap = tree<K, V, less<K>, rb_tree_tag, tree_order_statistics_node_update>;
 
-template <class T> void _print(T arg) { cerr << arg << endl; }
-
-template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << tab1; }cerr << endl; }
-
 // <------------------------------------- Code ------------------------------------->
+const int N = 1e7 + 1;
 
-const int N = 1e6;
-const int mod = 1e9;
+vector<pii> dp(N, {0, 1});
+
+void calc() {
+	dp[0] = {0, 0};
+	dp[1] = {0, 0};
+	for(int i = 2; i * i <= N; i++) {
+		dp[i].ff = dp[i - 1].ff;
+		if(dp[i].ss == 1) {
+			for(int j = i * i; j <= N; j += i) {
+				dp[j].ss = 0;
+			}
+			dp[i].ff++;
+		}
+	}
+	int i = sqrt(N);
+	for(; i <= N; i++) {
+		dp[i].ff = dp[i - 1].ff;
+		if(dp[i].ss == 1) dp[i].ff++;
+	}
+}
 
 void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+	int x, y;
+	cin >> x >> y;
+	int ans = y - x;
+	int no_of_p = dp[y].ff - dp[x].ff;
+	cerr << dp[y].ff << tab1 << dp[x].ff << endl;
+	ans -= no_of_p;
+	if(dp[x + 1].ss == 1)
+		ans++;
+	cout << ans << endl;
+	
 }
 
 int main() {
     clock_t begin_69 = clock();
     fast_io;
-
-    int t; cin >> t;
-    while(t--) solve();
-    
-    
+    int t;
+    cin >> t;
+    calc();
+    while(t--) {
+    	solve();
+	}
+	 
     #ifndef ONLINE_JUDGE
           clock_t terminator_69 = clock();
           cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
     #endif 
     return 0;
 }
-
-

@@ -18,9 +18,7 @@ int LargestRectInHisto(vector<int> a, int n) {
 		s.push(i);
 	}
 	/* to empty stack*/
-	while(!s.empty()) {
-		s.pop();
-	}
+	while(!s.empty()) s.pop();
 	for(int i = n - 1; i >= 0; i--) {
 		while(!s.empty() && a[s.top()] >= a[i]) {
 			s.pop();

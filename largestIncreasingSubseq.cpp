@@ -11,7 +11,7 @@ int largestIncSubseq(vi &a, int n) {
 
     dp[n] = 1;
     rep(i, 0, n) {
-        if(a[n] > a[i]) {
+        if(a[n] >= a[i]) {
             dp[n] = max(dp[n], 1 + largestIncSubseq(a, i));
         }
     }
@@ -26,7 +26,10 @@ int32_t main() {
         cin >> a[i];
     }
     dp = vi(n, -1);
-    cout << largestIncSubseq(a, n - 1) << endl;
+    int ans = 1;
+    rep(i, 1, n) {
+        ans = max(ans, largestIncSubseq(a, i));
+    }
 
     // dp = vi(n, 1);
     // rep(i, 1, n) {
@@ -36,7 +39,12 @@ int32_t main() {
     //         }
     //     }
     // }
-    // cout << dp[n -1] << endl;
+    // int ans = 1;
+    // rep(i, 0, n) {
+    //     cerr << dp[i] << " ";
+    //     ans = max(ans, dp[i]);
+    // }
+    cout << ans << endl;
 
     return 0;
 }

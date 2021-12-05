@@ -13,6 +13,6 @@ void permutation(string s, string sol = ""){
 }
 
 int main() {
-	permutation("ABC"); 
+	permutation("ABC");
 	return 0;
 }

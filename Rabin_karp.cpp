@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
+// Date: 2021-12-05 15:06
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,7 +12,6 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
@@ -44,39 +43,53 @@ template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << 
 
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e6;
+const int pp = 31;
 const int mod = 1e9;
 
-void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+vl hsh;
+vl power;
+
+int Rabin_Karp(string s, string p) {
+	int n = s.size();
+	int m = p.size();
+	power = vl(n + 1, 1);
+	rep(i, 1, n + 1) {
+		power[i] = (power[i - 1] * pp) % mod;
+	}
+
+	hsh = vl(n + 1, 0);
+	rep(i, 0, n) {
+		hsh[i + 1] = (hsh[i] + (s[i] - 'a' + 1) * power[i]) % mod;
+	}
+	ll SS = 0;
+	rep(i, 0, m) {
+		SS = (SS + (p[i] - 'a' + 1) * power[i]) % mod;
+	}
+
+	rep(i, 0, n - m + 1) {
+		int curr = (hsh[i + m] - hsh[i] + mod) % mod;
+		if(curr == (SS * power[i]) % m) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 int main() {
     clock_t begin_69 = clock();
     fast_io;
-
-    int t; cin >> t;
-    while(t--) solve();
+    string s; cin >> s;
+    string p; cin >> p;
     
+    int ans = Rabin_Karp(s, p);
+    cout << (ans != -1 ? ans : -1) << endl;
+    // for(auto it: pref) {
+    // 	cout << it << tab1;
+    // }
     
     #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+        clock_t terminator_69 = clock();
+        cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
     #endif 
     return 0;
 }
-
-

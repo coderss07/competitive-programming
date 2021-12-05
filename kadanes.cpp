@@ -29,6 +29,7 @@ int main() {
 	{
 		total += a[i];
 		a[i] =- a[i];
+		cerr << a[i] << " ";
 	}
 	cout << a[0] << endl;
 	wrapSum = total + kadenes(a, n);

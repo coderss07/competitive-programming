@@ -653,6 +653,19 @@ void topView(node * root) {
     }      
 }
 
+int sumOfleafNodes(node* root) {
+	if(!root) return 0;
+
+	if(!root->lchild && !root->rchild) {
+		return root->data;
+	}
+
+	int la = sumOfleafNodes(root->lchild);
+	int ra = sumOfleafNodes(root->rchild);
+
+	return la + ra;
+} 
+
 int main() {
 	node* head = NULL;
 	insert(head, 6);
@@ -675,10 +688,12 @@ int main() {
 	/ \	   /  \
    2   5  8    12
   / \	 / \  /  \
-1	 3	7	9 11  13
+ 1	 3	7	9 11  13
 */
 
-	topView(head);
+
+	// topView(head);
+	cout << sumOfleafNodes(head) << endl;
 
 	// map<int, vector<int> > mp;
 	// verticalOrderprint(head, mp);

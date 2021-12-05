@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
+// Date: 2021-11-22 18:00
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,7 +12,6 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
@@ -44,39 +43,52 @@ template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << 
 
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e6;
+const int N = 1e5 + 10;
 const int mod = 1e9;
 
-void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+vvi adj;
+int n;
+vi vis;
+vvi dp;
+
+int TSP(int node, int cnt) {
+	if(cnt == n - 1 && adj[node][1]) {
+		return adj[node][1];
+	}
+	if(dp[node][cnt] != -1) {
+		return dp[node][cnt];
+	}
+	dp[node][cnt] = N;
+	rep(i, 1, n) {
+		if(!vis[i] && adj[node][i]) {
+			vis[i] = 1;
+			dp[node][cnt] = min(dp[node][cnt], TSP(i, cnt + 1) + adj[node][i]);
+			vis[i] = 0;
+		}
+	}
+	return dp[node][cnt];
 }
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
+	clock_t begin_69 = clock();
+	fast_io;
+	cin >> n;
+	n++;
+	adj = vvi(n, vi(n));
+	dp = vvi(n, vi(n, -1));
+	rep(i, 1, n) {
+		rep(j, 1, n) {
+			cin >> adj[i][j];
+		}
+	}
+	vis = vi(n, 0);
+	vis[1] = 1;
 
-    int t; cin >> t;
-    while(t--) solve();
-    
-    
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif 
-    return 0;
+	cout << TSP(1, 1) << endl;
+	
+	#ifndef ONLINE_JUDGE
+		clock_t terminator_69 = clock();
+		cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+	#endif 
+	return 0;
 }
-
-

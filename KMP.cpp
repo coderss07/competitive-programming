@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
+// Date: 2021-12-05 15:06
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,7 +12,6 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
@@ -44,39 +43,63 @@ template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << 
 
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e6;
+const int N = 1e5 + 10;
 const int mod = 1e9;
 
-void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+vi pref;
+
+void calc_pref(string p) {
+	pref = vi(p.size(), 0);
+	int j = 0;
+	rep(i, 1, p.size()) {
+		if(p[i] == p[j]) {
+			pref[i] = j + 1;
+			j++;
+		}else {
+			while(j > 0 && p[i] != p[j]) {
+				j = pref[j - 1];
+			}
+			if(p[i] == p[j]) {
+				pref[i] = j + 1;
+				j++;
+			}
+		}
+	}
+}
+
+int KMP(string s, string p) {
+	int in = -1, j(0);
+	rep(i, 0, s.size()) {
+		if(s[i] == p[j]) {
+			j++;
+		}else {
+			while(j > 0 && s[i] != p[j]) {
+				j = pref[j - 1];
+			}
+		}
+		if(j == p.size()) {
+			in = i - p.size() + 1;
+			break;
+		}
+	}
+	return in;
 }
 
 int main() {
     clock_t begin_69 = clock();
     fast_io;
-
-    int t; cin >> t;
-    while(t--) solve();
-    
+    string s; cin >> s;
+    string p; cin >> p;
+    calc_pref(p);
+    int ans = KMP(s, p);
+    cout << (ans != -1 ? ans : -1) << endl;
+    for(auto it: pref) {
+    	cout << it << tab1;
+    }
     
     #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+        clock_t terminator_69 = clock();
+        cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
     #endif 
     return 0;
 }
-
-

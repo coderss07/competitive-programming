@@ -313,6 +313,54 @@ void evevAfterOdd(node* head){
 	odd->next=evenstart;
 }
 
+/* From this 1->6->9->13->15->20->26->NULL
+			To
+  1->26->6->20->9->15->13->NULL
+  a1->an->a2>an-1->a3->.......*/
+node* ptr;
+
+void helper(node* head) {
+	if(!head) {
+		return;
+	}
+	helper(head->next);
+	if(!ptr) {
+		return;
+	}
+	if(head == ptr || ptr->next == head) {
+		head->next = NULL;
+		ptr = NULL;
+		return;
+	}
+	head->next = ptr->next;
+	ptr->next = head;
+	ptr = head->next;
+}
+
+void reorder(node* head) {
+	ptr = head;
+	helper(head);
+}
+
+void sort_list(node* head) {
+	if(!head || !head->next) { // if no node exist or only one node exist then no need to sort
+		return;
+	} 
+	node* ptr1 = head;
+	node* ptr2;
+
+	while(ptr1->next) {
+		ptr2 = ptr1->next;
+		while(ptr2) {
+			if(ptr1->data > ptr2->data) {
+				swap(ptr1->data, ptr2->data);
+			}
+			ptr2 = ptr2->next;
+		}
+		ptr1 = ptr1->next;
+	}
+}
+
 void display(node* head){
 	if(head == NULL){
 		cout<<"List is Empty" <<endl;
@@ -329,28 +377,33 @@ void display(node* head){
 
 int main() {
     node* head = NULL;
-    insertAtLast(head, 1);
-    insertAtLast(head, 6);
     insertAtLast(head, 9);
-    insertAtLast(head, 13);
     insertAtLast(head, 15);
-    insertAtLast(head, 20);
+    insertAtLast(head, 6);
+    insertAtLast(head, 13);
+    insertAtLast(head, 1);
     insertAtLast(head, 26);
+    insertAtLast(head, 20);
+    display(head);
+    // sort_list(head);
+    // display(head);
+    reorder(head);
+    display(head);
     // insertAtFirst(head, 0);
     // display(head);
-    node* head1 = NULL;
-    insertAtLast(head1, 3);
-    insertAtLast(head1, 11);
-    insertAtLast(head1, 16);
-    insertAtLast(head1, 21);
+    // node* head1 = NULL;
+    // insertAtLast(head1, 3);
+    // insertAtLast(head1, 11);
+    // insertAtLast(head1, 16);
+    // insertAtLast(head1, 21);
     // insertAtLast(head1, 22);
     // display(head1);
-    node*  head2=merge(head, head1);
-    display(head2);
-    evevAfterOdd(head2);
+    // node*  head2=merge(head, head1);
+    // display(head2);
+    // evevAfterOdd(head2);
     // intersection(head,head1,4);
     // cout<< findIntersect(head, head1)<<endl;
-    display(head2);
+    // display(head2);
     // append(head,5);
     // head = reverseKnode(head, 3);
     // cout<< length(head) <<endl;

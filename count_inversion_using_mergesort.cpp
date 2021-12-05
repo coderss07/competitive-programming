@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2021-10-24 19:29
+// Date: 2021-10-24 16:50
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -12,7 +12,6 @@
 #define vl vector<ll>
 #define vll vector<vector<ll>>
 #define vc vector<char>
-#define vs vector<string>
 #define vvc vector<vector<char>>
 #define pii pair<int, int>
 #define ff first
@@ -44,33 +43,51 @@ template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << 
 
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e6;
+const int N = 1e5 + 10;
 const int mod = 1e9;
 
-void solve() {
-    int n;
-    cin >> n;
-    if(n == 1) {
-    	cout << 1 << tab1 << 1 << endl;
-    	return;
-    }
-    ll tot = pow(2, n);
-    ll sum = 0;
-    rep(i, 1, n) {
-    	sum += i;
-    	cout << i << tab1;
-    }
-    sum += (n - 1);
-    cout << n - 1 << tab1 << tot - sum << endl;
+int merge(vi& a, int l, int m, int r) {
+	int ans = 0;
+	int i = l;
+	int j = m + 1;
+	vi b(r - l + 1);
+	int k = 0;
+	while(i <= m && j <= r) {
+		if(a[i] <= a[j]) {
+			b[k++] = a[i++];
+		}else {
+			b[k++] = a[j++];
+			ans += m - l + 1 - i;
+		}
+	}
+	while(i <= m) b[k++] = a[i++];
+	while(j <= r) b[k++] = a[j++];
+	return ans;
+}
+
+int merge_sort(vi &a, int l, int r) {
+	int ans = 0;
+	if(l < r) {
+		int mid = (l + r) / 2;
+		ans += merge_sort(a, l, mid);
+		ans += merge_sort(a, mid + 1, r);
+		ans += merge(a, l, mid, r);
+	}
+
+	return ans;
 }
 
 int main() {
     clock_t begin_69 = clock();
     fast_io;
-
-    int t; cin >> t;
-    while(t--) solve();
+    int n;
+    cin >> n;
+    vi a(n);
+    rep(i, 0, n) {
+    	cin >> a[i];
+    }
     
+    cout << merge_sort(a, 0, n - 1) << endl;
     
     #ifndef ONLINE_JUDGE
           clock_t terminator_69 = clock();
@@ -78,5 +95,3 @@ int main() {
     #endif 
     return 0;
 }
-
-
