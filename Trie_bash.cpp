@@ -77,49 +77,51 @@ int query(int a) {
 }
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
-    root = new trieNode();
-    int n; cin >> n;
-    vi a(n);
-    rep(i, 0, n) {
-    	cin >> a[i];
-    }
-    insert(0);
-    vi rmax(n + 1, 0);
-    int R = a[n - 1];
-    rmax[n - 1] = query(R);
-    insert(R);
-    rrep(i, n - 1, 0) {
-    	R = R xor a[i];
-    	rmax[i] = max(rmax[i + 1], query(R));
-    	insert(R);
-    }
+	clock_t begin_69 = clock();
+	fast_io;
+	root = new trieNode();
+	int n; cin >> n;
+	vi a(n);
+	rep(i, 0, n) {
+		cin >> a[i];
+	}
+	insert(0);
+	vi rmax(n + 1, 0);
+	int R = a[n - 1];
+	rmax[n - 1] = query(R);
+	insert(R);
+	rrep(i, n - 1, 0) {
+		R = R xor a[i];
+		rmax[i] = max(rmax[i + 1], query(R));
+		insert(R);
+	}
+	_print(rmax);
 
-    free(root);
+	free(root);
 
-    root = new trieNode();
-    insert(0);
-    vi lmax(n + 1, 0);
-    R = a[0];
-    lmax[0] = query(R);
-    insert(R);
-    rep(i, 1, n) {
-    	R = R xor a[i];
-    	lmax[i] = max(lmax[i - 1], query(R));
-    	insert(R);
-    }
-    int ans = 0;
-    rep(i, 0, n - 1) {
-        ans = max(ans, lmax[i] + rmax[i + 1]);
-    }
+	root = new trieNode();
+	insert(0);
+	vi lmax(n + 1, 0);
+	R = a[0];
+	lmax[0] = query(R);
+	insert(R);
+	rep(i, 1, n) {
+		R = R xor a[i];
+		lmax[i] = max(lmax[i - 1], query(R));
+		insert(R);
+	}
+	_print(lmax);
+	int ans = 0;
+	rep(i, 0, n - 1) {
+		ans = max(ans, lmax[i] + rmax[i + 1]);
+	}
 
 
 	cout << ans << endl;
 
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif 
-    return 0;
+	#ifndef ONLINE_JUDGE
+		clock_t terminator_69 = clock();
+		cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+	#endif
+	return 0;
 }

@@ -26,27 +26,53 @@ using namespace std;
 const int N = 1e6 + 1;
 const int mod = 1e9 + 7;
 
+int calc(vi& a, int m) {
+	int sum = 0;
+	rep(i, 0, a.size()) {
+		sum += (a[i] / m);
+		if(a[i] % m) sum++;
+	}
+	return sum;
+}
 
-// void solve() {
-//     cin >> s;
-//     int q; cin >> q;
-//     calc();
-//     while(q--) {
-//         int l, r;
-//         cin >> l >> r;
-
-//     }cout << endl;
-// }
+void solve(int tt) {
+	int n, k; cin >> n >> k;
+	vi a(n);
+	int l = 1, r = 1;
+	ll sum = 0;
+	rep(i, 0, n) {
+		cin >> a[i];
+		r = max(r, a[i]);
+		sum += a[i];
+	}
+	if(sum <= k) {
+		cout << 1 << endl;
+		return;
+	}
+	int ans = r;
+	while(l <= r) {
+		int mid = (l + r) / 2;
+		sum = calc(a, mid);
+		if(sum <= k) {
+			r = mid - 1;
+			ans = min(ans, mid);
+		}else {
+			l = mid + 1;
+		}
+	}
+	cout << ans << endl;
+}
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
-    int t;
-    cin >> t;
-    while(t--) solve(t);
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif
-    return 0;
+	clock_t begin_69 = clock();
+	fast_io;
+	int t;
+	cin >> t;
+	while(t--) solve(t);
+
+	#ifndef ONLINE_JUDGE
+		clock_t terminator_69 = clock();
+		cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+	#endif
+	return 0;
 }

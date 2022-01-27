@@ -26,22 +26,17 @@ string solve(string s, string t) {
     int n = s.size();
     
     unordered_map<char, int> mp1;
-    while(true) {
-        
+    while(true) { 
         bool f1 = 0;
         bool f2 = 0;
-        //Acquire
         while(i < n - 1 && cnt < dcnt) {
-
             i++;
             mp1[s[i]]++;
             if(mp1[s[i]] <= mp[s[i]]) {
                 cnt++;
-            }
-            
+            } 
             f1 = 1;
         }
-        // collect answer and release
         while(j < i and cnt == dcnt) {
             if(ans.size() == 0 || ans.size() > i - j) {
                 ans = s.substr(j + 1, i - j);

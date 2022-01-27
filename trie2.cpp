@@ -39,9 +39,10 @@ const int mod = 1e9;
 
 class  trie {
 	public:
-		unordered_map<char, trie*> child;
+		vector<trie*> child;
 		bool isEnd;
 		trie() {
+			child = vector<trie*>(26, NULL);
 			isEnd = false;
 		}
 };
@@ -60,35 +61,60 @@ void insert(string s) {
 	ptr->isEnd = 1;
 }
 
-bool search(string s) {
-	trie* ptr = root;
-	for(auto c: s) {
-		if(!ptr->child[c - 'a']) {
-			return false;
-		}
-		ptr = ptr->child[c - 'a'];
+void DFS(trie* node, string s, vector<string> &ans) {
+	if(node->isEnd) {
+		ans.pb(s);
 	}
-	if(!ptr->isEnd) return false;
-	return true;
+
+	rep(i, 0, 26) {
+		if(ans.size() >= 3) return;
+		trie* it = node->child[i];
+		// char c = 'a' + i;
+		if(it) DFS(it, s + char('a' + i), ans);
+	}
+}
+
+vector<vector<string>> search(string s) {
+	trie* ptr = root;
+	vector<vector<string>> ans;
+	rep(i, 0, s.size()) {
+		if(ptr->child[s[i] - 'a']) {
+			vector<string> tmp;
+			DFS(ptr->child[s[i] - 'a'], s.substr(0, i + 1), tmp);
+			ans.pb(tmp);
+			ptr = ptr->child[s[i] - 'a'];
+		}else {
+			ans.pb({});
+		}
+	}
+	return ans;
 }
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
-    root = new trie();
-    int n; cin >> n;
-    rep(i, 0, n) {
-    	string s; cin >> s;
-    	insert(s);
-    }
-    
-    string s; cin >> s;
-    if(search(s)) cout << "Present" << endl;
-    else cout << "Not Present" << endl;
+	clock_t begin_69 = clock();
+	fast_io;
+	root = new trie();
+	int n; cin >> n;
+	rep(i, 0, n) {
+		string s; cin >> s;
+		insert(s);
+	}
+	
+	string s; cin >> s;
+	vector<vector<string>> ans = search(s);
+	for(auto &i: ans) {
+		for(auto &j: i) {
+			cout << "[\"" << j << "\"], ";
+		}cout << endl;
+	}
 
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif 
-    return 0;
+
+	// if(search(s)) cout << "Present" << endl;
+	// else cout << "Not Present" << endl;
+
+	#ifndef ONLINE_JUDGE
+		clock_t terminator_69 = clock();
+		cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+	#endif
+	return 0;
 }

@@ -109,11 +109,10 @@ void insertByPos(node* &head,int data,int pos){
 }
 
 void makeCycle(node* &head, int pos) {
-	node* ptr=head;
-	node* startptr=head;
+	node* ptr = head;
+	node* startptr = head;
 	int cnt=1;
 	while(ptr->next!=NULL){
-
 		if(cnt==pos){
 			startptr=ptr;
 		}
@@ -137,18 +136,18 @@ bool detectCycle(node* head){
 }
 
 void removeCycle(node* &head){
-	node* slowptr=head;
-	node* fastptr=head;
+	node* slowptr = head;
+	node* fastptr = head;
 	do{
-		slowptr=slowptr->next;
-		fastptr=fastptr->next->next;
-	}while(slowptr!=fastptr);
-	fastptr=head;
+		slowptr = slowptr->next;
+		fastptr = fastptr->next->next;
+	}while(slowptr != fastptr);
+	fastptr = head;
 	while(fastptr->next != slowptr->next){
-		fastptr=fastptr->next;
-		slowptr=slowptr->next;
+		fastptr = fastptr->next;
+		slowptr = slowptr->next;
 	}
-	slowptr->next=NULL;
+	slowptr->next = NULL;
 }
 
 void reverse(node* &head){
@@ -165,11 +164,9 @@ void reverse(node* &head){
 }
 
 node* reverseRecursive(node* head){
-
 	if(head == NULL || head->next == NULL){
 		return head;
 	}
-
 	node* newh=reverseRecursive(head->next);
 	head->next->next=head;
 	head->next=NULL;
@@ -177,21 +174,20 @@ node* reverseRecursive(node* head){
 }
 
 node* reverseKnode(node* head, int k){
-	node* prev=NULL;
-	node* curr=head;
-	node* nxt=NULL;
-	int cnt=0;
-	while(curr!=NULL && cnt<k){
-		nxt=curr->next;
-		curr->next=prev;
-		prev=curr;
-		curr=nxt;
+	node* prev = NULL;
+	node* curr = head;
+	node* nxt = NULL;
+	int cnt = 0;
+	while(curr != NULL && cnt < k){
+		nxt = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = nxt;
 		cnt++;
 	}
-	if(nxt!=NULL)
-		head->next=reverseKnode(nxt,k);
+	if(nxt != NULL)
+		head->next = reverseKnode(nxt, k);
 	return prev;
-
 }
 
 int length(node* head){
@@ -203,127 +199,125 @@ int length(node* head){
 	return l;
 }
 
-void append(node* &head, int k){
+void append(node* &head, int k) {
 	int len = length(head);
-	node* tail=head;
+	node* tail = head;
 	node* ptr1;
 	node* ptr2;
-	int cnt=1;
+	int cnt = 1;
 	while(tail->next != NULL){
-		if(cnt == len-k)
-			ptr1=tail;
-		if(cnt == len-k+1)
-			ptr2=tail;
-		tail=tail->next;
+		if(cnt == len - k)
+			ptr1 = tail;
+		if(cnt == len - k + 1)
+			ptr2 = tail;
+		tail = tail->next;
 		cnt++;
 	}
-	tail->next=head;
-	ptr1->next=NULL;
-	head=ptr2;
+	tail->next = head;
+	ptr1->next = NULL;
+	head = ptr2;
 }
 
-void intersection(node* h1, node* h2, int pos){
-	node* ptr=h1;
+void intersection(node* h1, node* h2, int pos) {
+	node* ptr = h1;
 	pos--;
-	while(ptr!=NULL && pos--){
-		ptr=ptr->next;
+	while(ptr && pos--){
+		ptr = ptr->next;
 	}
-	if(ptr!=NULL){
-		node* ptr1=h2;
-		while(ptr1->next!=NULL)
-			ptr1=ptr1->next;
-		ptr1->next=ptr;
-
+	if(ptr){
+		node* ptr1 = h2;
+		while(ptr1->next)
+			ptr1 = ptr1->next;
+		ptr1->next = ptr;
 	}
 }
 
 int findIntersect(node* h1, node* h2){
-
-	int l1=length(h1);
-	int l2=length(h2);
-	int cnt=0;
+	int l1 = length(h1);
+	int l2 = length(h2);
+	int cnt = 0;
 	node* ptr1;
 	node* ptr2;	
-	if(l1>l2){
-		cnt=l1-l2;
-		ptr1=h1;
-		ptr2=h2;
-	}else if(l2>l1){
-		cnt=l2-l1;
-		ptr1=h2;
-		ptr2=h1;
+	if(l1 > l2) {
+		cnt = l1 - l2;
+		ptr1 = h1;
+		ptr2 = h2;
+	}else if(l2 > l1) {
+		cnt = l2 - l1;
+		ptr1 = h2;
+		ptr2 = h1;
 	}
-	while(cnt--){
-		ptr1=ptr1->next;
-		if(ptr1==NULL){
+	while(cnt--) {
+		ptr1 = ptr1->next;
+		if(!ptr1) {
 			return -1;
 		}
 	}
-	while(ptr1!=NULL && ptr2!=NULL){
-		if(ptr1==ptr2){
+	while(ptr1 && ptr2) {
+		if(ptr1 == ptr2) {
 			return ptr1->data;
 		}
-		ptr1=ptr1->next;
-		ptr2=ptr2->next;
+		ptr1 = ptr1->next;
+		ptr2 = ptr2->next;
 	}
 	return -1;
 }
 
-node* merge(node* h1,node* h2){
-	node* h3=NULL;
-	node* ptr1=h1;
-	node* ptr2=h2;
-	while(ptr1!=NULL && ptr2!=NULL){
+node* merge(node* h1, node* h2) {
+	node* h3 = NULL;
+	node* ptr1 = h1;
+	node* ptr2 = h2;
+	while(ptr1 && ptr2){
 		int val;
-		if(ptr1->data < ptr2->data){
-			val=ptr1->data;
-			ptr1=ptr1->next;
-		}else if(ptr1->data > ptr2->data){
-			val=ptr2->data;
-			ptr2=ptr2->next;
+		if(ptr1->data < ptr2->data){ 
+			val = ptr1->data;
+			ptr1 = ptr1->next;
+		}else if(ptr1->data > ptr2->data) {
+			val = ptr2->data;
+			ptr2 = ptr2->next;
 		}
-		insertAtLast(h3,val);
+		insertAtLast(h3, val);
 	}
-	while(ptr1!=NULL){
-		int val=ptr1->data;
-		ptr1=ptr1->next;
-		insertAtLast(h3,val);
+	while(ptr1) {
+		int val = ptr1->data;
+		ptr1 = ptr1->next;
+		insertAtLast(h3, val);
 	}
-	while(ptr2!=NULL){
-		int val=ptr2->data;
-		ptr2=ptr2->next;
-		insertAtLast(h3,val);
+	while(ptr2) {
+		int val = ptr2->data;
+		ptr2 = ptr2->next;
+		insertAtLast(h3, val);
 	}
 	return h3;
 }
 
-void evevAfterOdd(node* head){
-	node* odd=head;
-	node* even=head->next;
-	node* evenstart=even;
-	while(odd->next!=NULL && even->next!=NULL){
-		odd->next=even->next;
-		odd=odd->next;
-		even->next=odd->next;
-		even=even->next;
+void evenAfterOdd(node* head) {
+	node* odd = head;
+	node* even = head->next;
+	node* evenstart = even;
+	while(odd->next && even->next) {
+		odd->next = even->next;
+		odd = odd->next;
+		even->next = odd->next;
+		even = even->next;
 	}
-	if(odd->next!=NULL){
-		even->next=NULL;
+	if(odd->next) {
+		even->next = NULL;
 	}
-	odd->next=evenstart;
+	odd->next = evenstart;
 }
 
 /* From this 1->6->9->13->15->20->26->NULL
 			To
   1->26->6->20->9->15->13->NULL
   a1->an->a2>an-1->a3->.......*/
-node* ptr;
+// node* ptr;
 
-void helper(node* head) {
+void helper(node* head, node* &ptr) {
 	if(!head) {
 		return;
 	}
-	helper(head->next);
+	helper(head->next, ptr);
 	if(!ptr) {
 		return;
 	}
@@ -338,8 +332,8 @@ void helper(node* head) {
 }
 
 void reorder(node* head) {
-	ptr = head;
-	helper(head);
+	node* ptr = head;
+	helper(head, ptr);
 }
 
 void sort_list(node* head) {
@@ -376,47 +370,60 @@ void display(node* head){
 }
 
 int main() {
-    node* head = NULL;
-    insertAtLast(head, 9);
-    insertAtLast(head, 15);
-    insertAtLast(head, 6);
-    insertAtLast(head, 13);
-    insertAtLast(head, 1);
-    insertAtLast(head, 26);
-    insertAtLast(head, 20);
-    display(head);
-    // sort_list(head);
-    // display(head);
-    reorder(head);
-    display(head);
-    // insertAtFirst(head, 0);
-    // display(head);
-    // node* head1 = NULL;
-    // insertAtLast(head1, 3);
-    // insertAtLast(head1, 11);
-    // insertAtLast(head1, 16);
-    // insertAtLast(head1, 21);
-    // insertAtLast(head1, 22);
-    // display(head1);
-    // node*  head2=merge(head, head1);
-    // display(head2);
-    // evevAfterOdd(head2);
-    // intersection(head,head1,4);
-    // cout<< findIntersect(head, head1)<<endl;
-    // display(head2);
-    // append(head,5);
-    // head = reverseKnode(head, 3);
-    // cout<< length(head) <<endl;
-    // head = reverseRecursive(head);
-    // makeCycle(head,3);
-    // cout<< (detectCycle(head)?"YES":"NO") <<endl;
-    // removeCycle(head);
-    // cout<< (detectCycle(head)?"YES":"NO") <<endl;
-    // delbyVal(head, 6);
-    // delByPos(head, 6);
-    // insertByPos(head,6,1);
-    // delbyVal(head,4);
-    // reverse(head);
-    // display(head);
+	node* head = NULL;
+	insertAtLast(head, 9);
+	insertAtLast(head, 15);
+	insertAtLast(head, 6);
+	insertAtLast(head, 13);
+	insertAtLast(head, 1);
+	insertAtLast(head, 26);
+	insertAtLast(head, 20);
+	insertAtLast(head, 18);
+	display(head);
+
+	// sort_list(head);
+	// display(head);
+
+	// reorder(head);
+	// display(head);
+
+	// insertAtFirst(head, 0);
+	// display(head);
+
+	// node* head1 = NULL;
+	// insertAtLast(head1, 3);
+	// insertAtLast(head1, 11);
+	// insertAtLast(head1, 16);
+	// insertAtLast(head1, 21);
+	// insertAtLast(head1, 22);
+	// display(head1);
+
+	// node* head2 = merge(head, head1);
+	// display(head2);
+
+	evenAfterOdd(head);
+	display(head);
+
+	// intersection(head,head1,4);
+	// cout<< findIntersect(head, head1)<<endl;
+	// display(head2);
+	// append(head, 5);
+	// display(head);
+
+	// head = reverseKnode(head, 3);
+	// display(head);
+
+	// cout<< length(head) <<endl;
+	// head = reverseRecursive(head);
+	// makeCycle(head,3);
+	// cout<< (detectCycle(head)?"YES":"NO") <<endl;
+	// removeCycle(head);
+	// cout<< (detectCycle(head)?"YES":"NO") <<endl;
+	// delbyVal(head, 6);
+	// delByPos(head, 6);
+	// insertByPos(head,6,1);
+	// delbyVal(head,4);
+	// reverse(head);
+	// display(head);
 	return 0;
 }
