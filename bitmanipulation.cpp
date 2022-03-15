@@ -44,7 +44,7 @@ uint32_t duplicate(int *a, int n) {
 			if(get_bit(i, k)) x++;
 			if(get_bit(a[i], k)) y++;
 		}
-		if(x < y) ans = (ans << k);
+		if(x < y) ans = (ans | (1 << k));
 	}
 	return ans;
 }
@@ -67,15 +67,26 @@ int unique(int *a, int n) {
 }
 
 void subset(int  *a, int n) {
-	for(int i = 0; i < (1<<n); i++) {
-		cout<<"{ ";
-		for(int j = 0; j < n; j++){
-			if(i & (1<<j))
-				cout<< a[j] <<" ";
+	for(int i = 0; i < (1 << n); i++) {
+		cout << "{ ";
+		for(int j = 0; j < n; j++) {
+			if(i & (1 << j))
+				cout << a[j] << " ";
 			else
-				cout<< "- ";
-		}cout<<"}"<<endl;
+				cout << "- ";
+		} cout << "}" << endl;
 	}
+}
+
+string printBin(int n) {
+	string s = "";
+	for(int i = 31; i >= 0; i--) {
+		if(n & 1) s += '1';
+		else s += '0';
+		n >>= 1;
+	}
+	reverse(s.begin(), s.end());
+	return s;
 }
 
 int main() {
@@ -92,11 +103,13 @@ int main() {
 
 	// cout<< no_of1s(60) << endl;
 
-	int a[3] = {1,2,3};
-	subset(a, 3);
+	// int a[3] = {1,2,3};
+	// subset(a, 3);
 
 	// int a[7] = {4, 1, 2, 3, 2, 1, 3};
 	// cout<< unique(a, 7) << endl;
+	// int a[7] = {1, 2, 4, 3, 4};
+	// cout << duplicate(a, 3);
 	// const int sz = 1e4 + 1;
     // string a = "10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101";
     // string b = "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011";
@@ -113,8 +126,9 @@ int main() {
     // if(s.empty()) {
     // 	s += "0";
     // }
-    // cout << bitset<20>(21) << endl;
-    // cout << 0b1110001;
+    // Swap Nibbles
+    cout << ((0b11001010 & 0b1111)<<4 | (0b11001010 & 0b11110000)>>4) << endl;
+    cout << 0b11001010 << " " << 0b10101100;
 
 	return 0;
 }

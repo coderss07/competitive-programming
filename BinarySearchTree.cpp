@@ -446,7 +446,6 @@ void printNode(node* head, int k){
 }
 
 int printAtdistk(node* head, node* &tar, int k){
-
 	if(head == NULL){
 		return -1;
 	}
@@ -637,7 +636,7 @@ void verticalOrderprint(node* head, map<int, vector<int>> &m, int h = 0) {
 
 void top(node* root, map<int, int> &m, int h = 0) {
     if(root) {
-        if(m[h] == 0) {
+        if(m.find(h) == m.end()) {
             m[h] = root->data;
         }
         top(root->lchild, m, h - 1);
@@ -692,8 +691,8 @@ int main() {
 */
 
 
-	// topView(head);
-	cout << sumOfleafNodes(head) << endl;
+	topView(head);
+	// cout << sumOfleafNodes(head) << endl;
 
 	// map<int, vector<int> > mp;
 	// verticalOrderprint(head, mp);
@@ -724,8 +723,8 @@ int main() {
 	// cout << endl;
 	// recoverBST(head);
 	// recoverBST(head);
-	inorder(head);
-	cout << endl;
+	// inorder(head);
+	// cout << endl;
 
 	// cout << largestBST(head).ans << endl;
 

@@ -10,11 +10,8 @@ vector<vector<bool>> vis(11, vector<bool>(11, false));
 
 pii find_cor(int num) {
     int r = ((num - 1) / 10) + 1;
-    if (num % 10 == 0)
-    {
-        return {r, 10};
-    }
-    return {r, num % 10};
+    int c = ((num - 1) % 10) + 1
+    return {r, c};
 }
 
 int SnakeAndLadder() {
@@ -56,9 +53,7 @@ int SnakeAndLadder() {
 }
 
 int main() {
-
     int n_l, n_s;
-
     cin >> n_l;
     rep(i, 0, n_l) {
         int s, d;

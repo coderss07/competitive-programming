@@ -1,130 +1,110 @@
 // Author : Sarthak Sharma
-// Date: 2021-11-07 14:24
+// Date: 2022-03-11 20:00:05
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-
-// <------------------------------------- Directives ------------------------------------->
-#define ll long long int
-#define vi vector<int>
-#define vl vector<ll>
-#define vll vector<vector<ll>>
-#define vc vector<char>
-#define vvc vector<vector<char>>
-#define pii pair<int, int>
-#define ff first
-#define ss second
-#define pb push_back
-#define mp make_pair
-#define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-#define endl "\n"
-#define tab1 " "
-#define lb lower_bound
-#define up upper_bound
-#define vvi vector<vector<int>>
-#define rep(i, a, b) for(int i = a; i < b; i++)
-#define rrep(i, b, a) for(int i = b - 1; i >= a; i--)
-#define fbo find_by_order
-#define oof order_of_key
-#define all(a) a.begin(), a.end()
 
 using namespace std;
-using namespace __gnu_pbds;
 
-// <------------------------------------- Templates ------------------------------------->
-template <class T> using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-template <class K, class V> using omap = tree<K, V, less<K>, rb_tree_tag, tree_order_statistics_node_update>;
-
-template <class T> void _print(T arg) { cerr << arg << endl; }
-
-template <class T> void _print(vector<T> &a) { for(auto &it: a) { cerr << it << tab1; }cerr << endl; }
-
+#define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define ll long long int
 // <------------------------------------- Code ------------------------------------->
 
-const int N = 1e5 + 10;
-const int mod = 1e9;
+// const int N = 1e5 + 10;
+// const int mod = 1e9 + 7;
+struct info {
+	string id;
+	pair<int, string> per;
+	int c1, c2, c3;
+};
 
-// void solve(int tc) {
-// 	int n; cin >> n;
-//     vl a(n);
-//     rep(i, 0, n) {
-//         cin >> a[i];
-//     }
-//     ll x = 0;
-//     rep(i, 0, 63) {
-//        	ll tmp = ((ll)1 << i);
-//        	ll cnt = 0;
-//         rep(i, 0, n) {
-//             if((a[i] + x) & tmp) cnt++;
-//         }
-//         if(cnt % 2 != 0) {
-//             x = x | tmp;
-//         }
-//     }
-//     ll xor_sum = 0;
-//     rep(i, 0, n) xor_sum ^= (a[i] + x);
-//     if(xor_sum == 0 && x != INT64_MAX) {
-//     	cout << x << endl;
-//     	return;
-//     }
-//     cout << -1 << endl;
-// }
-
-void solve(int tc) {
-	string s;
-	cin >> s;
-	vi cnt;
-	int tmp = 1;
-	rep(i, 1, s.size()) {
-		if(s[i] != s[i - 1]) cnt.pb(tmp), tmp = 1;
-		else tmp++;
+pair<int, string> calc(string s) {
+	int n = s.size();
+	int i = 0;
+	while(i < n && s[i] != '.') i++;
+	int ans1 = stoi(s.substr(0, i));
+	string ans2;
+	if(i < n) {
+		i++;
+		string tmp = s.substr(i);
+		int j = tmp.size();
+		j--;
+		while(j >= 0 && tmp[j] == '0') j--;
+		ans2 = s.substr(i, j + 1);
+	}else {
+		ans2 = "";
 	}
-	cnt.pb(tmp);
+	return {ans1, ans2};
+}
 
-	for(auto it: cnt) cerr << it << tab1;
-	cerr << endl;
-
-	ll res;
-	
-	res = 0;
-	int n = cnt.size();
-	for(int i = 1; i < n - 1; i += 2) {
-		if(i < n - 2 && cnt[i + 1] == 1) {
-			res++;
-		}else if(cnt[i] > 1) {
-			res += 2;
-		}else {
-			res++;
-		}
+int comp(string a, string b) {
+	int n = min(a.size(), b.size());
+	for(int i = 0; i < n; i++) {
+		if(a[i] < b[i]) return -1;
+		if(a[i] > b[i]) return 1;
 	}
-	
-		
-	ll ans = 0;
-	for(int i = 0; i < n; i += 2) {
-		if(i < n - 1 && cnt[i + 1] == 1) {
-			ans++;
-		}else if(cnt[i] > 1) {
-			ans += 2;
-		}else {
-			ans++;
-		}
-	}
-	
-	res = min(res, ans);
-	cout << res << endl;
+	if(a.size() == b.size()) return 0;
+	if(a.size() > b.size()) return 1;
+	return -1;
 }
 
 int main() {
-  clock_t begin_69 = clock();
-  fast_io;
-  int t; cin >> t;
-  while(t--) solve(t);
-    
-  #ifndef ONLINE_JUDGE
-    clock_t terminator_69 = clock();
-    cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-  #endif 
-  return 0;
+	fast_io;
+
+	int c, n; cin >> c >> n;
+	vector<int> col(c + 1);
+	for(int i = 1; i <= c; i++) cin >> col[i];
+	vector<info> a(n);
+	for(int k = 0; k < n; k++) {
+		string s; cin >> s;
+		int i = 0, j = 0;
+		int n = s.size();
+		// cout << s << endl;
+		while(i < n && s[i] != ',') i++;
+		a[k].id = s.substr(j, i - j);
+		i++, j = i;
+		while(i < n && s[i] != ',') i++;
+		string tmp = s.substr(j, i - j);
+		a[k].per = calc(tmp);
+		i++, j = i;
+		while(i < n && s[i] != ',') i++;
+		a[k].c1 = stoi(s.substr(j + 2, i - j - 2));
+		i++, j = i;
+		while(i < n && s[i] != ',') i++;
+		a[k].c2 = stoi(s.substr(j + 2, i - j - 2));
+		i++, j = i;
+		a[k].c3 = stoi(s.substr(j + 2));
+		
+	}
+	sort(a.begin(), a.end(), [&](info x, info y){
+		// if(x.per.first == y.per.first || comp(x.per.second, y.per.second) == 0) {
+		// 	return x.id < y.id;
+		// }
+		if(x.per == y.per) {
+			return x.id < y.id;
+		}
+		if(x.per.first == y.per.first) {
+			return (comp(x.per.second, y.per.second) == 1 ? true : false);
+		}
+		return x.per.first > y.per.first;
+	});
+
+	
+	for(int i = 0; i < n; i++) {
+		cerr<<a[i].id<<" "<<a[i].per.first<<"."<<a[i].per.second<<" "<<a[i].c3<<endl;
+		if(a[i].c1 <= c && col[a[i].c1] > 0) {
+			cout << a[i].id << " C-" << a[i].c1 << endl;
+			col[a[i].c1]--;
+		}else if(a[i].c3 <= c && col[a[i].c2] > 0) {
+			cout << a[i].id << " C-" << a[i].c2 << endl;
+			col[a[i].c2]--;
+		}else if(a[i].c3 <= c && col[a[i].c3] > 0) {
+			cout << a[i].id << " C-" << a[i].c3 << endl;
+			col[a[i].c3]--;
+		}
+	}
+
+	cout << endl << comp("0083", "008");
+ 
+	return 0;
 }

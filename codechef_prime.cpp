@@ -71,18 +71,18 @@ void solve() {
 }
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
-    int t;
-    cin >> t;
-    calc();
-    while(t--) {
-    	solve();
-	}
-	 
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif 
-    return 0;
+		clock_t begin_69 = clock();
+		fast_io;
+		int t;
+		cin >> t;
+		calc();
+		while(t--) {
+			solve();
+		}
+	
+		#ifndef ONLINE_JUDGE
+			clock_t terminator_69 = clock();
+			cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+		#endif 
+		return 0;
 }

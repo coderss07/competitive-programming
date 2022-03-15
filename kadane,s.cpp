@@ -9,7 +9,7 @@ int main() {
 	for (int i = 0; i < n; ++i){
 		cin >> a[i];
 	}
-	int maxSum = INT_MIN;
+	int maxSum = 0;
 	int curr = 0;
 	for (int i = 0; i < n; ++i)
 	{

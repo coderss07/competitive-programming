@@ -1,5 +1,5 @@
 // Author : Sarthak Sharma
-// Date: 2022-02-16 20:01:19
+// Date: 2022-02-12 11:55:29
 
 // <------------------------------------- Headers Files ------------------------------------->
 #include<bits/stdc++.h>
@@ -53,44 +53,68 @@ template <class T> void _input(T &a, int n) { for(auto &it: a) { cin >> it; } }
 // const int N = 1e5 + 10;
 // const int mod = 1e9;
 
-
 void solve(int tt) {
 	int n; cin >> n;
-	string x, y; cin >> x >> y;
-	string ans(2 * n, ' ');
-	sort(all(x));
-	sort(all(y), greater<char>());
-	int l = 0, r = 2 * n - 1;
-	int i = 0, j = 0;
-	while (l < r) {
-		if(x[i] < y[j]) {
-			ans[l] = x[i];
-			i++;
-			l++;
-		}else {
-			ans[r] = x.back();
-			x.pop_back();
-			r--;
-		}
-		if(x.size() == 0 || x[i] < y[j]) {
-			ans[l] = y[j];
-			l++;
-			j++;
-		}else {
-			ans[r] = y.back();
-			y.pop_back();
-			r--;
-		}
+	vi nums(n);
+	rep(i, 0, n) {
+		cin >> nums[i];
 	}
-	cout << ans << endl;
+
+	// vector<vector<pii>> dp(n, vector<pii>(n));
+	// int sum = 0;
+	// rep(gap, 0, n) {
+	// 	int i = 0, j = gap;
+	// 	while(j < n) {
+	// 		if(gap == 0) {
+	// 			dp[i][j] = mp(a[i], a[i]);
+	// 		}else if(gap == 1) {
+	// 			dp[i][j] = mp(min(a[i], a[j]), max(a[i], a[j]));
+	// 		}else {
+	// 			dp[i][j].ff = min(dp[i + 1][j - 1].ff, min(a[i], a[j]));
+	// 			dp[i][j].ss = max(dp[i + 1][j - 1].ss, max(a[i], a[j]));
+	// 		}
+	// 		sum += (dp[i][j].ss - dp[i][j].ff);
+	// 		i++, j++;
+	// 	}
+	// }
+	// cout << sum << endl;
+
+
+	vector<int> maxr(n), minr(n);
+	stack<int> minSt, maxSt;
+	for(int i = n - 1; i >= 0; i--) {
+		while(!maxSt.empty() && nums[maxSt.top()] < nums[i]) maxSt.pop();
+		if(maxSt.empty()) maxr[i] = n - i;
+		else maxr[i] = maxSt.top() - i;
+		while(!minSt.empty() && nums[minSt.top()] > nums[i]) minSt.pop();
+		if(minSt.empty()) minr[i] = n - i;
+		else minr[i] = minSt.top() - i;
+		maxSt.push(i);
+		minSt.push(i);
+	}
+	while(!maxSt.empty()) maxSt.pop();
+	while(!minSt.empty()) minSt.pop();
+	ll maxAns = 0, minAns = 0;
+	for(int i = 0; i < n; i++) {
+		while(!maxSt.empty() && nums[maxSt.top()] < nums[i]) maxSt.pop();
+		if(maxSt.empty()) maxAns += (nums[i] * (maxr[i] * (i + 1)));
+		else maxAns += (nums[i] * (maxr[i] * (i - maxSt.top())));
+		while(!minSt.empty() && nums[minSt.top()] > nums[i]) minSt.pop();
+		if(minSt.empty()) minAns += (nums[i] * (minr[i] * (i + 1)));
+		else minAns += (nums[i] * (minr[i] * (i - minSt.top())));
+		maxSt.push(i);
+		minSt.push(i);
+	}
+	cout << maxAns - minAns << endl;
+
 }
 
 int main() {
 	clock_t begin_69 = clock();
 	fast_io;
 
-	int t; cin >> t;
-	// int t = 1;
+	// int t; cin >> t;
+	int t = 1;
 	while(t--) {
 		solve(t);
 	}

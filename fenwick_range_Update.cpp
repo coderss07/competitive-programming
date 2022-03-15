@@ -64,28 +64,28 @@ int query(int idx) {
 }
 
 int main() {
-    clock_t begin_69 = clock();
-    fast_io;
-    cin >> n;
-    bit = vi(n + 5);
+	clock_t begin_69 = clock();
+	fast_io;
+	cin >> n;
+	bit = vi(n + 5);
 
-    int q; cin >> q;
-    while(q--) {
-    	int type; cin >> type;
-    	if(type == 1) {
-    		int idx; cin >> idx;
-    		int ans = query(idx);
-    		cout << ans << endl;
-    	}else if(type == 2) {
-    		int l, r, val;
-    		cin >> l >> r >> val;
-    		update(l, val);
-    		update(r + 1, -val);
-    	}
-    }
-    #ifndef ONLINE_JUDGE
-          clock_t terminator_69 = clock();
-          cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
-    #endif 
-    return 0;
+	int q; cin >> q;
+	while(q--) {
+		int type; cin >> type;
+		if(type == 1) {
+			int idx; cin >> idx;
+			int ans = query(idx);
+			cout << ans << endl;
+		}else if(type == 2) {
+			int l, r, val;
+			cin >> l >> r >> val;
+			update(l, val);
+			update(r + 1, -val);
+		}
+	}
+	#ifndef ONLINE_JUDGE
+		  clock_t terminator_69 = clock();
+		  cerr << "\nExecuted In: " << double(terminator_69 - begin_69) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+	#endif 
+	return 0;
 }

@@ -5,15 +5,18 @@
 using namespace std;
 
 vi dp;
+unordered_map<int, int> mp;
 
 int largestIncSubseq(vi &a, int n) {
     if(dp[n] != -1) return dp[n];
 
     dp[n] = 1;
     rep(i, 0, n) {
-        if(a[n] >= a[i]) {
+        if(a[n] > a[i]) {
             dp[n] = max(dp[n], 1 + largestIncSubseq(a, i));
-        }
+        }else
+            dp[n] = max(dp[n], largestIncSubseq(a, i));
+        mp[dp[n]]++;
     }
 
     return dp[n];
@@ -26,10 +29,7 @@ int32_t main() {
         cin >> a[i];
     }
     dp = vi(n, -1);
-    int ans = 1;
-    rep(i, 1, n) {
-        ans = max(ans, largestIncSubseq(a, i));
-    }
+    int ans = largestIncSubseq(a, n - 1);
 
     // dp = vi(n, 1);
     // rep(i, 1, n) {
@@ -45,6 +45,7 @@ int32_t main() {
     //     ans = max(ans, dp[i]);
     // }
     cout << ans << endl;
+    for(auto &it: mp) cout << it.first << " " << it.second << endl;
 
     return 0;
 }
